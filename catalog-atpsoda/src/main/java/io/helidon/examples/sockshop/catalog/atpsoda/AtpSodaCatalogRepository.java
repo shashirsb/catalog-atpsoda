@@ -172,7 +172,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             OracleDatabase db = asp.dbConnect();
             // Get a collection with the name "socks".
             // This creates a database table, also named "socks", to store the collection.
-            OracleCollection col = db.admin().createCollection("socks");
+            OracleCollection col = db.admin().createCollection("catalog");
             numDocs = col.find().count();
 
         } catch (OracleException e) {
