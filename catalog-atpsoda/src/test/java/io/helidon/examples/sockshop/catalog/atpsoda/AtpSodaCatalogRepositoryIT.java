@@ -10,6 +10,8 @@ package io.helidon.examples.sockshop.catalog.atpsoda;
 import io.helidon.examples.sockshop.catalog.CatalogRepository;
 import io.helidon.examples.sockshop.catalog.CatalogRepositoryTest;
 
+import io.helidon.examples.sockshop.catalog.atpsoda.AtpSodaProducers;
+
 import static io.helidon.examples.sockshop.catalog.atpsoda.AtpSodaProducers.*;
 
 /**
@@ -18,9 +20,7 @@ import static io.helidon.examples.sockshop.catalog.atpsoda.AtpSodaProducers.*;
 public class AtpSodaCatalogRepositoryIT extends CatalogRepositoryTest {
     @Override
     protected CatalogRepository getCatalogRepository() {
-        String host = System.getProperty("db.host","localhost");
-        int    port = Integer.parseInt(System.getProperty("db.port","27017"));
-
-        return new AtpSodaCatalogRepository(socks(db(client(host, port)))).loadData();
+        AtpSodaProducers asp = new AtpSodaProducers();
+        asp.dbConnect();
     }
 }
