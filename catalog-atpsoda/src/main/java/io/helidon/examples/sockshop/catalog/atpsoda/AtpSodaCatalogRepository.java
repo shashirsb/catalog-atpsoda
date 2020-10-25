@@ -86,42 +86,82 @@ import org.json.simple.parser.JSONParser;
 @Traced
 public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
-    // private MongoCollection<AtpSodaSock> socks;
+    private MongoCollection < AtpSodaSock > socks;
 
-    // @Inject
-    // AtpSodaCatalogRepository(MongoCollection<AtpSodaSock> socks) {
-    //     this.socks = socks;
-    // }
+    @Inject
+    AtpSodaCatalogRepository(MongoCollection < AtpSodaSock > socks) {
+        this.socks = socks;
+    }
 
     @PostConstruct
     void init() {
         try {
-            String catalogResponse = catalog("catalog-docs.json");
+            String catalogResponse = loadData("catalog-docs.json");
             System.out.println(catalogResponse);
         } catch (Exception e) {
-            //TODO: handle exception
+            e.printStackTrace();
         }
-       
+
     }
 
-    // @Override
-    // public Collection<? extends AtpSodaSock> getSocks(String tags, String order, int pageNum, int pageSize) {
-    //     ArrayList<AtpSodaSock> results = new ArrayList<>();
+    @Override
+    public Collection << ? extends AtpSodaSock > getSocks(String tags, String order, int pageNum, int pageSize) {
+        ArrayList < AtpSodaSock > results = new ArrayList < > ();
 
-    //     int skipCount = pageSize * (pageNum - 1);
-    //     socks.find(tagsFilter(tags))
-    //             .sort(Sorts.ascending(order))
-    //             .skip(skipCount)
-    //             .limit(pageSize)
-    //             .forEach((Consumer<? super AtpSodaSock>) results::add);
+        AtpSodaSock atpSodaSock = new AtpSodaSock();
 
-    //     return results;
-    // }
 
-    // @Override
-    // public AtpSodaSock getSock(String sockId) {
-    //     return socks.find(eq("id", sockId)).first();
-    // }
+        List < String > imageUrlList = new ArrayList < > ();
+
+        imageUrlList.add("/catalogue/images/bit_of_leg_1.jpeg");
+        imageUrlList.add("/catalogue/images/bit_of_leg_2.jpeg");
+
+        Set < String > tag_Set = new HashSet < String > ();
+
+        tag_Set.add("blue");
+        tag_Set.add("skin");
+
+        atpSodaSock.id = "0a4f044-b040-410d-8ead-4de0446aec7e";
+        atpSodaSock.name = "ssssssssssssssssssssssssss";
+        atpSodaSock.description = "sssssssssssssssssssssssssssssss";
+        atpSodaSock.imageUrl = imageUrlList;
+        atpSodaSock.price = 7.99 f;
+        atpSodaSock.count = 115;
+        atpSodaSock.tag = hash_Set;
+
+        results.add(mongoSock);
+
+
+        return results;
+    }
+
+    @Override
+    public AtpSodaSock getSock(String sockId) {
+        AtpSodaSock atpSodaSock = new AtpSodaSock();
+
+
+        List < String > imageUrlList = new ArrayList < > ();
+
+        imageUrlList.add("/catalogue/images/bit_of_leg_1.jpeg");
+        imageUrlList.add("/catalogue/images/bit_of_leg_2.jpeg");
+
+        Set < String > tag_Set = new HashSet < String > ();
+
+        tag_Set.add("blue");
+        tag_Set.add("skin");
+
+        atpSodaSock.id = "0a4f044-b040-410d-8ead-4de0446aec7e";
+        atpSodaSock.name = "ssssssssssssssssssssssssss";
+        atpSodaSock.description = "sssssssssssssssssssssssssssssss";
+        atpSodaSock.imageUrl = imageUrlList;
+        atpSodaSock.price = 7.99 f;
+        atpSodaSock.count = 115;
+        atpSodaSock.tag = hash_Set;
+
+        results.add(mongoSock);
+        return results;
+
+    }
 
     // @Override
     // public long getSockCount(String tags) {
@@ -161,7 +201,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
     //     return new BsonDocument();
     // }
 
-    static String catalog(String fileName) throws Exception {
+    static String loadData(String fileName) throws Exception {
         // Create a collection with the name "MyJSONCollection".
         // This creates a database table, also named "MyJSONCollection", to store the collection.
         try {
@@ -174,7 +214,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             JSONArray jsonArray = (JSONArray) parser.parse(stringToParse);
 
 
-            AtpSodaProducers asp = new AtpSodaProducers();        
+            AtpSodaProducers asp = new AtpSodaProducers();
             OracleDatabase db = asp.dbConnect();
 
             // Create a collection with the name "MyJSONCollection".
