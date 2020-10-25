@@ -14,6 +14,8 @@ import io.helidon.examples.sockshop.catalog.atpsoda.AtpSodaProducers;
 
 import static io.helidon.examples.sockshop.catalog.atpsoda.AtpSodaProducers.*;
 
+import org.junit.jupiter.api.Test;
+
 /**
  * Integration tests for {@link io.helidon.examples.sockshop.catalog.mongo.MongoCatalogRepository}.
  */
