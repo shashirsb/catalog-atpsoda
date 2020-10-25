@@ -26,38 +26,38 @@ public class Sock implements Serializable {
      */
     @Id
     @Schema(description = "Product identifier")
-    private String id;
+    public String id;
 
     /**
      * Product name.
      */
     @Schema(description = "Product name")
-    private String name;
+    public String name;
 
     /**
      * Product description.
      */
     @Schema(description = "Product description")
-    private String description;
+    public String description;
 
     /**
      * A list of product image URLs.
      */
     @ElementCollection
     @Schema(description = "A list of product image URLs")
-    private List<String> imageUrl;
+    public List<String> imageUrl;
 
     /**
      * Product price.
      */
     @Schema(description = "Product price")
-    private float price;
+    public float price;
 
     /**
      * Product count.
      */
     @Schema(description = "Product count")
-    private int count;
+    public int count;
 
     /**
      * Product tags.
