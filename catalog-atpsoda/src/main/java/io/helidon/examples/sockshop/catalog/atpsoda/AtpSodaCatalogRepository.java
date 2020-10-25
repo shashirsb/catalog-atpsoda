@@ -65,7 +65,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                 .sort(Sorts.ascending(order))
                 .skip(skipCount)
                 .limit(pageSize)
-                .forEach((Consumer<? super MongoSock>) results::add);
+                .forEach((Consumer<? super AtpSodaSock>) results::add);
 
         return results;
     }
