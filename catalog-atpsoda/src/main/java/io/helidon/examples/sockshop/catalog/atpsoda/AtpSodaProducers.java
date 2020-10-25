@@ -92,16 +92,16 @@ public class AtpSodaProducers {
 
   
 
-    /**
-     * This gets config from application.yaml on classpath
-     * and uses "app" section.
-     */
-    private static final Config CONFIG = Config.create().get("app");
+    // /**
+    //  * This gets config from application.yaml on classpath
+    //  * and uses "app" section.
+    //  */
+    // private static final Config CONFIG = Config.create().get("app");
 
-    /**
-     * The config value for the key {@code version}.
-     */
-    private static String version = CONFIG.get("version").asString("1.0.0");
+    // /**
+    //  * The config value for the key {@code version}.
+    //  */
+    // private static String version = CONFIG.get("version").asString("1.0.0");
 
     /**
      * In-memory price catalog
