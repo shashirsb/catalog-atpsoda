@@ -61,8 +61,7 @@ import java.util.Iterator;
 import java.util.HashMap;
 import java.util.stream.Stream;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+
 
 import oracle.soda.rdbms.OracleRDBMSClient;
 import oracle.soda.OracleDatabase;
@@ -188,9 +187,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
             }
 
-      
-            //col.admin().drop();
-            System.out.println(dbDisconnect());
+
 
             return "successfully created socks collection !!!";
 
