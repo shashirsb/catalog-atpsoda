@@ -101,7 +101,7 @@ public class AtpSodaProducers {
     /**
      * In-memory product catalog
      */
-    private static org.json.simple.JsonObject catalog;
+    //private static org.json.simple.JsonObject catalog;
 
     /**
      * database data
