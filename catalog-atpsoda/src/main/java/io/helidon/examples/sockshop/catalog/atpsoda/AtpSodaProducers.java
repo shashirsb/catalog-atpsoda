@@ -34,33 +34,43 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 //////////
 
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonArray;
+
+import java.nio.file.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+
+import io.helidon.config.Config;
+import io.helidon.webserver.Routing;
+import io.helidon.webserver.ServerRequest;
+import io.helidon.webserver.ServerResponse;
+import io.helidon.webserver.Service;
+
+import java.io.*;
+import java.util.Properties;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.HashMap;
+import java.util.stream.Stream;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 
 import oracle.soda.rdbms.OracleRDBMSClient;
-
 import oracle.soda.OracleDatabase;
 import oracle.soda.OracleCursor;
 import oracle.soda.OracleCollection;
 import oracle.soda.OracleDocument;
 import oracle.soda.OracleException;
 
-import java.util.Properties;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
-
-import java.io.*;
-import java.nio.file.*;
-
-import com.mongodb.client.MongoCollection;
-import org.bson.Document;
-import java.util.function.Consumer;
 
 /**
  * CDI support for MongoDB.
@@ -101,7 +111,7 @@ public class AtpSodaProducers {
     /**
      * In-memory product catalog
      */
-    //private static org.json.simple.JsonObject catalog;
+    private static JsonObject catalog;
 
     /**
      * database data
