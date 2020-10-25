@@ -157,10 +157,36 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
     }
 
-    // @Override
-    // public long getSockCount(String tags) {
-    //     return socks.countDocuments(tagsFilter(tags));
-    // }
+    @Override
+    public long getSockCount(String tags) {
+        try {
+            // pass the path to the file as a parameter 
+            String stringToParse = "";
+            stringToParse = new String(Files.readAllBytes(Paths.get(fileName)));
+
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObjects = new JSONObject();
+            JSONArray jsonArray = (JSONArray) parser.parse(stringToParse);
+
+
+            AtpSodaProducers asp = new AtpSodaProducers();
+            OracleDatabase db = asp.dbConnect();
+
+            // Create a collection with the name "MyJSONCollection".
+            // This creates a database table, also named "MyJSONCollection", to store the collection.
+            OracleCollection col = db.admin().createCollection("socks");
+
+            long numDocs = col.find().count();
+
+
+        } catch (OracleException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return numDocs;
+    }
 
     // @Override
     // public Set<String> getTags() {
