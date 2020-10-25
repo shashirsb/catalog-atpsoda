@@ -158,14 +158,14 @@ public class AtpSodaProducers {
 
              // Get a database.
              db = cl.getDatabase(conn);
-             
+
             System.out.println("DB Connection established successfully!!!");
          
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return conn;
+        return db;
     }
 
 }
