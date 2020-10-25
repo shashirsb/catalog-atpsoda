@@ -159,7 +159,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
     @Override
     public long getSockCount(String tags) {
-        long numDocs = new long();
+        long numDocs = 0;
         try {
 
             AtpSodaProducers asp = new AtpSodaProducers();
