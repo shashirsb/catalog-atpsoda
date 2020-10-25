@@ -86,23 +86,29 @@ import org.json.simple.parser.JSONParser;
 @Traced
 public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
-    // private MongoCollection < AtpSodaSock > socks;
+    // private MongoCollection<MongoSock> socks;
 
     // @Inject
-    // AtpSodaCatalogRepository(MongoCollection < AtpSodaSock > socks) {
+    // MongoCatalogRepository(MongoCollection<MongoSock> socks) {
     //     this.socks = socks;
     // }
 
     // @PostConstruct
     // void init() {
-    //     try {
-    //         String catalogResponse = loadData("catalog-docs.json");
-    //         System.out.println(catalogResponse);
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //     }
-
+    //     loadData();
+    //     socks.createIndex(Indexes.hashed("id"));
     // }
+
+    @PostConstruct
+    void init() {
+        try {
+            String catalogResponse = loadData("catalog-docs.json");
+            System.out.println(catalogResponse);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @Override
     public Collection < ? extends AtpSodaSock > getSocks(String tags, String order, int pageNum, int pageSize) {
@@ -164,13 +170,10 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
             AtpSodaProducers asp = new AtpSodaProducers();
             OracleDatabase db = asp.dbConnect();
-
-            // Create a collection with the name "MyJSONCollection".
-            // This creates a database table, also named "MyJSONCollection", to store the collection.
+            // Get a collection with the name "socks".
+            // This creates a database table, also named "socks", to store the collection.
             OracleCollection col = db.admin().createCollection("socks");
-
             numDocs = col.find().count();
-
 
         } catch (OracleException e) {
             e.printStackTrace();
@@ -181,13 +184,15 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
         return numDocs;
     }
 
-    // @Override
-    // public Set<String> getTags() {
-    //     Set<String> tags = new HashSet<>();
-    //     socks.distinct("tag", String.class)
-    //             .forEach((Consumer<? super String>) tags::add);
-    //     return tags;
-    // }
+    @Override
+    public Set<String> getTags() {
+        Set<String> tags = new HashSet<>();
+        tags.add("blue");
+        tags.add("skin");
+        // socks.distinct("tag", String.class)
+        //         .forEach((Consumer<? super String>) tags::add);
+        return tags;
+    }
 
     // @Override
     // public CatalogRepository loadData() {
@@ -214,7 +219,8 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
     //     return new BsonDocument();
     // }
 
-    static String loadData(String fileName) throws Exception {
+    @Override
+    public String loadData(String fileName) {
         // Create a collection with the name "MyJSONCollection".
         // This creates a database table, also named "MyJSONCollection", to store the collection.
         try {
@@ -243,16 +249,13 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                 // Insert the document into a collection.
                 col.insert(doc);
 
-            }
-
-
-
-            return "successfully created socks collection !!!";
+            }           
 
         } catch (OracleException e) {
-            return "error " + e;
+            e.printStackTrace();
         } catch (Exception e) {
-            return "error " + e;
+            e.printStackTrace();
         }
+        return "successfully created socks collection !!!";
     }
 }
