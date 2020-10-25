@@ -47,12 +47,12 @@ import static com.mongodb.client.model.Filters.or;
 @Traced
 public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
-    private MongoCollection<AtpSodaSock> socks;
+    // private MongoCollection<AtpSodaSock> socks;
 
-    @Inject
-    AtpSodaCatalogRepository(MongoCollection<AtpSodaSock> socks) {
-        this.socks = socks;
-    }
+    // @Inject
+    // AtpSodaCatalogRepository(MongoCollection<AtpSodaSock> socks) {
+    //     this.socks = socks;
+    // }
 
     @PostConstruct
     void init() {
