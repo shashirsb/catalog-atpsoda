@@ -102,7 +102,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
     @PostConstruct
     void init() {
         try {
-            String catalogResponse = loadData("catalog-docs.json");
+            String catalogResponse = createData("catalog-docs.json");
             System.out.println(catalogResponse);
         } catch (Exception e) {
             e.printStackTrace();
@@ -220,7 +220,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
     // }
 
     @Override
-    public String loadData(String fileName) {
+    public String createData(String fileName) {
         // Create a collection with the name "MyJSONCollection".
         // This creates a database table, also named "MyJSONCollection", to store the collection.
         try {
