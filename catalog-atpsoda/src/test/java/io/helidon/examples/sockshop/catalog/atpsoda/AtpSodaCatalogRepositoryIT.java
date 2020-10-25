@@ -10,7 +10,7 @@ package io.helidon.examples.sockshop.catalog.atpsoda;
 import io.helidon.examples.sockshop.catalog.CatalogRepository;
 import io.helidon.examples.sockshop.catalog.CatalogRepositoryTest;
 
-import static io.helidon.examples.sockshop.catalog.mongo.AtpSodaProducers.*;
+import static io.helidon.examples.sockshop.catalog.atpsoda.AtpSodaProducers.*;
 
 /**
  * Integration tests for {@link io.helidon.examples.sockshop.catalog.mongo.MongoCatalogRepository}.
