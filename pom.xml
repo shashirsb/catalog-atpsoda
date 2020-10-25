@@ -18,7 +18,6 @@
 
     <modules>
         <module>catalog-core</module>
-        <module>catalog-mongo</module>
 		    <module>catalog-atpsoda</module>
     </modules>
 
