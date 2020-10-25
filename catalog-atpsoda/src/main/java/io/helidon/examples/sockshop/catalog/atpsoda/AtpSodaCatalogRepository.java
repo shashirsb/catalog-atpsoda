@@ -95,8 +95,13 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
     @PostConstruct
     void init() {
-        String catalogResponse = catalog("catalog-docs.json");
-        System.out.println(catalogResponse);
+        try {
+            String catalogResponse = catalog("catalog-docs.json");
+            System.out.println(catalogResponse);
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+       
     }
 
     // @Override
