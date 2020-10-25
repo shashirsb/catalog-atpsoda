@@ -32,6 +32,36 @@ import static java.lang.String.format;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
+//////////
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+import oracle.soda.rdbms.OracleRDBMSClient;
+
+import oracle.soda.OracleDatabase;
+import oracle.soda.OracleCursor;
+import oracle.soda.OracleCollection;
+import oracle.soda.OracleDocument;
+import oracle.soda.OracleException;
+
+import java.util.Properties;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.ParseException;
+import org.json.simple.parser.JSONParser;
+
+import java.io.*;
+import java.nio.file.*;
+
+import com.mongodb.client.MongoCollection;
+import org.bson.Document;
+import java.util.function.Consumer;
+
 /**
  * CDI support for MongoDB.
  */
