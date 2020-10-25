@@ -56,11 +56,8 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
     @PostConstruct
     void init() {
-        // loadData();
-        // socks.createIndex(Indexes.hashed("id"));
-
-        AtpSodaProducers asp = new AtpSodaProducers();
-        asp.dbConnect();
+        String catalogResponse = catalog("catalog-docs.json");
+        System.out.println(catalogResponse);
     }
 
     // @Override
@@ -119,4 +116,48 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
     //     }
     //     return new BsonDocument();
     // }
+
+    static String catalog(String fileName) throws Exception {
+        // Create a collection with the name "MyJSONCollection".
+        // This creates a database table, also named "MyJSONCollection", to store the collection.
+        try {
+            // pass the path to the file as a parameter 
+            String stringToParse = "";
+            stringToParse = new String(Files.readAllBytes(Paths.get(fileName)));
+
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObjects = new JSONObject();
+            JSONArray jsonArray = (JSONArray) parser.parse(stringToParse);
+
+
+            AtpSodaProducers asp = new AtpSodaProducers();        
+            OracleDatabase db = asp.dbConnect();
+
+            // Create a collection with the name "MyJSONCollection".
+            // This creates a database table, also named "MyJSONCollection", to store the collection.
+            OracleCollection col = db.admin().createCollection("socks");
+
+            for (int i = 0; i < jsonArray.size(); i++) {
+
+                // Create a JSON document.
+                OracleDocument doc =
+                    db.createDocumentFromString(jsonArray.get(i).toString());
+
+                // Insert the document into a collection.
+                col.insert(doc);
+
+            }
+
+      
+            //col.admin().drop();
+            System.out.println(dbDisconnect());
+
+            return "successfully created socks collection !!!";
+
+        } catch (OracleException e) {
+            return "error " + e;
+        } catch (Exception e) {
+            return "error " + e;
+        }
+    }
 }
