@@ -159,7 +159,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
     @Override
     public long getSockCount(String tags) {
-        long numDocs = null;
+        long numDocs = new long();
         try {
 
             AtpSodaProducers asp = new AtpSodaProducers();
@@ -169,7 +169,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             // This creates a database table, also named "MyJSONCollection", to store the collection.
             OracleCollection col = db.admin().createCollection("socks");
 
-            long numDocs = col.find().count();
+            numDocs = col.find().count();
 
 
         } catch (OracleException e) {
