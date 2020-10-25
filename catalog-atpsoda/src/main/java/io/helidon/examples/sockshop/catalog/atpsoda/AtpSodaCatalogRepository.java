@@ -5,7 +5,7 @@
  * http://oss.oracle.com/licenses/upl.
  */
 
-package io.helidon.examples.sockshop.catalog.mongo;
+package io.helidon.examples.sockshop.catalog.atpsoda;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,12 +41,12 @@ import static com.mongodb.client.model.Filters.or;
 @ApplicationScoped
 @Specializes
 @Traced
-public class MongoCatalogRepository extends DefaultCatalogRepository {
+public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
-    private MongoCollection<MongoSock> socks;
+    private MongoCollection<AtpSodaSock> socks;
 
     @Inject
-    MongoCatalogRepository(MongoCollection<MongoSock> socks) {
+    AtpSodaCatalogRepository(MongoCollection<AtpSodaSock> socks) {
         this.socks = socks;
     }
 
@@ -57,8 +57,8 @@ public class MongoCatalogRepository extends DefaultCatalogRepository {
     }
 
     @Override
-    public Collection<? extends MongoSock> getSocks(String tags, String order, int pageNum, int pageSize) {
-        ArrayList<MongoSock> results = new ArrayList<>();
+    public Collection<? extends AtpSodaSock> getSocks(String tags, String order, int pageNum, int pageSize) {
+        ArrayList<AtpSodaSock> results = new ArrayList<>();
 
         int skipCount = pageSize * (pageNum - 1);
         socks.find(tagsFilter(tags))
@@ -71,7 +71,7 @@ public class MongoCatalogRepository extends DefaultCatalogRepository {
     }
 
     @Override
-    public MongoSock getSock(String sockId) {
+    public AtpSodaSock getSock(String sockId) {
         return socks.find(eq("id", sockId)).first();
     }
 
@@ -91,7 +91,7 @@ public class MongoCatalogRepository extends DefaultCatalogRepository {
     @Override
     public CatalogRepository loadData() {
         if (this.socks.countDocuments() == 0) {
-            this.socks.insertMany(loadSocksFromJson(MongoSock.class));
+            this.socks.insertMany(loadSocksFromJson(AtpSodaSock.class));
         }
         return this;
     }

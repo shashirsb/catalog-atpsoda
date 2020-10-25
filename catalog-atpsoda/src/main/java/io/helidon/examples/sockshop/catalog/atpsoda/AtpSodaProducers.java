@@ -5,7 +5,7 @@
  * http://oss.oracle.com/licenses/upl.
  */
 
-package io.helidon.examples.sockshop.catalog.mongo;
+package io.helidon.examples.sockshop.catalog.atpsoda;
 
 import java.util.Collections;
 
@@ -37,7 +37,7 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
  */
 @ApplicationScoped
 @Log
-public class MongoProducers {
+public class AtpSodaProducers {
 
     /**
      * Default MongoDB host to connect to.
@@ -91,8 +91,8 @@ public class MongoProducers {
      */
     @Produces
     @ApplicationScoped
-    public static MongoCollection<MongoSock> socks(MongoDatabase db) {
-        return db.getCollection("socks", MongoSock.class);
+    public static MongoCollection<AtpSodaSock> socks(MongoDatabase db) {
+        return db.getCollection("socks", AtpSodaSock.class);
     }
 
     // ---- helpers ---------------------------------------------------------

@@ -5,7 +5,7 @@
  * http://oss.oracle.com/licenses/upl.
  */
 
-package io.helidon.examples.sockshop.catalog.mongo;
+package io.helidon.examples.sockshop.catalog.atpsoda;
 
 import javax.json.bind.annotation.JsonbTransient;
 
@@ -19,17 +19,11 @@ import org.bson.types.ObjectId;
  * We need to define an {@code ObjectId _id} field explicitly to avoid
  * that.
  */
-public class MongoSock extends Sock {
-    /**
-     * Just to make MongoDB happy.
-     */
-    @SuppressWarnings("unused")
-    @JsonbTransient
-    public ObjectId _id;
+public class AtpSodaSock extends Sock {
 
     /**
-     * Construct {@code MongoSock} instance.
+     * Construct {@code AtpSodaSock} instance.
      */
-    public MongoSock() {
+    public AtpSodaSock() {
     }
 }
