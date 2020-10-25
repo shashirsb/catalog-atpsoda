@@ -152,6 +152,13 @@ public class AtpSodaProducers {
 
             // Get a JDBC connection to an Oracle instance.
             conn = DriverManager.getConnection(DB_URL, props);
+
+             // Get an OracleRDBMSClient - starting point of SODA for Java application.
+             OracleRDBMSClient cl = new OracleRDBMSClient();
+
+             // Get a database.
+             db = cl.getDatabase(conn);
+             
             System.out.println("DB Connection established successfully!!!");
          
 
