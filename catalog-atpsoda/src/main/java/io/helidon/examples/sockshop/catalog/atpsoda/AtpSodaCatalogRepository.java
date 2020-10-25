@@ -159,15 +159,8 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
     @Override
     public long getSockCount(String tags) {
+        long numDocs = null;
         try {
-            // pass the path to the file as a parameter 
-            String stringToParse = "";
-            stringToParse = new String(Files.readAllBytes(Paths.get(fileName)));
-
-            JSONParser parser = new JSONParser();
-            JSONObject jsonObjects = new JSONObject();
-            JSONArray jsonArray = (JSONArray) parser.parse(stringToParse);
-
 
             AtpSodaProducers asp = new AtpSodaProducers();
             OracleDatabase db = asp.dbConnect();
