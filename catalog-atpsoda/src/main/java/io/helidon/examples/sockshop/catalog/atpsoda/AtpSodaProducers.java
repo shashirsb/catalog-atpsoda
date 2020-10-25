@@ -125,7 +125,7 @@ public class AtpSodaProducers {
     private static String DB_PASSWORD;
 
 
-    public Connection dbConnect(){
+    public OracleDatabase dbConnect(){
         try {
 
             /**
