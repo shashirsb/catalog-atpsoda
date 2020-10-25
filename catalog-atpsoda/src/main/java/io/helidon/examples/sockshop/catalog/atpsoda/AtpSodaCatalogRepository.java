@@ -132,28 +132,28 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
     @Override
     public AtpSodaSock getSock(String sockId) { 
-        // ArrayList <AtpSodaSock> results = new ArrayList <> ();
-        // AtpSodaSock atpSodaSock = new AtpSodaSock();
-        // List <String> imageUrlList = new ArrayList <> ();
+        ArrayList <AtpSodaSock> results = new ArrayList <> ();
+        AtpSodaSock atpSodaSock = new AtpSodaSock();
+        List <String> imageUrlList = new ArrayList <> ();
 
-        // imageUrlList.add("/catalogue/images/bit_of_leg_1.jpeg");
-        // imageUrlList.add("/catalogue/images/bit_of_leg_2.jpeg");
+        imageUrlList.add("/catalogue/images/bit_of_leg_1.jpeg");
+        imageUrlList.add("/catalogue/images/bit_of_leg_2.jpeg");
 
-        // Set <String> tag_Set = new HashSet <String> ();
+        Set <String> tag_Set = new HashSet <String> ();
 
-        // tag_Set.add("blue");
-        // tag_Set.add("skin");
+        tag_Set.add("blue");
+        tag_Set.add("skin");
 
-        // atpSodaSock.id = "0a4f044-b040-410d-8ead-4de0446aec7e";
-        // atpSodaSock.name = "ssssssssssssssssssssssssss";
-        // atpSodaSock.description = "sssssssssssssssssssssssssssssss";
-        // atpSodaSock.imageUrl = imageUrlList;
-        // atpSodaSock.price = 7.99f;
-        // atpSodaSock.count = 115;
-        // atpSodaSock.tag = tag_Set;
+        atpSodaSock.id = "0a4f044-b040-410d-8ead-4de0446aec7e";
+        atpSodaSock.name = "ssssssssssssssssssssssssss";
+        atpSodaSock.description = "sssssssssssssssssssssssssssssss";
+        atpSodaSock.imageUrl = imageUrlList;
+        atpSodaSock.price = 7.99f;
+        atpSodaSock.count = 115;
+        atpSodaSock.tag = tag_Set;
 
-        // results.add(atpSodaSock);
-        // return results;
+        results.add(atpSodaSock);
+        return atpSodaSock;
 
     }
 
