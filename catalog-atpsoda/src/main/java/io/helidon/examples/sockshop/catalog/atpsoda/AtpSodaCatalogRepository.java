@@ -106,14 +106,14 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
     @Override
     public Collection < ? extends AtpSodaSock > getSocks(String tags, String order, int pageNum, int pageSize) {
-        ArrayList < AtpSodaSock > results = new ArrayList < > ();
+        ArrayList <AtpSodaSock> results = new ArrayList <> ();
         AtpSodaSock atpSodaSock = new AtpSodaSock();
-        List < String > imageUrlList = new ArrayList < > ();
+        List <String> imageUrlList = new ArrayList <> ();
 
         imageUrlList.add("/catalogue/images/bit_of_leg_1.jpeg");
         imageUrlList.add("/catalogue/images/bit_of_leg_2.jpeg");
 
-        Set < String > tag_Set = new HashSet < String > ();
+        Set <String> tag_Set = new HashSet <String> ();
 
         tag_Set.add("blue");
         tag_Set.add("skin");
@@ -124,24 +124,22 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
         atpSodaSock.imageUrl = imageUrlList;
         atpSodaSock.price = 7.99f;
         atpSodaSock.count = 115;
-        atpSodaSock.tag = hash_Set;
+        atpSodaSock.tag = tag_Set;
 
         results.add(atpSodaSock);
-
-
         return results;
     }
 
     @Override
     public AtpSodaSock getSock(String sockId) { 
-        ArrayList < AtpSodaSock > results = new ArrayList < > ();
+        ArrayList <AtpSodaSock> results = new ArrayList <> ();
         AtpSodaSock atpSodaSock = new AtpSodaSock();
-        List < String > imageUrlList = new ArrayList < > ();
+        List <String> imageUrlList = new ArrayList <> ();
 
         imageUrlList.add("/catalogue/images/bit_of_leg_1.jpeg");
         imageUrlList.add("/catalogue/images/bit_of_leg_2.jpeg");
 
-        Set < String > tag_Set = new HashSet < String > ();
+        Set <String> tag_Set = new HashSet <String> ();
 
         tag_Set.add("blue");
         tag_Set.add("skin");
@@ -152,7 +150,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
         atpSodaSock.imageUrl = imageUrlList;
         atpSodaSock.price = 7.99f;
         atpSodaSock.count = 115;
-        atpSodaSock.tag = hash_Set;
+        atpSodaSock.tag = tag_Set;
 
         results.add(atpSodaSock);
         return results;

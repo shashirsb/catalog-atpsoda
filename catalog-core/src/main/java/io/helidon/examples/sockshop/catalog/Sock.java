@@ -64,5 +64,5 @@ public class Sock implements Serializable {
      */
     @ElementCollection
     @Schema(description = "Product tags")
-    private Set<String> tag;
+    public Set<String> tag;
 }
