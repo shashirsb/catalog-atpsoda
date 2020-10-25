@@ -93,16 +93,16 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
     //     this.socks = socks;
     // }
 
-    @PostConstruct
-    void init() {
-        try {
-            String catalogResponse = loadData("catalog-docs.json");
-            System.out.println(catalogResponse);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    // @PostConstruct
+    // void init() {
+    //     try {
+    //         String catalogResponse = loadData("catalog-docs.json");
+    //         System.out.println(catalogResponse);
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
 
-    }
+    // }
 
     @Override
     public Collection < ? extends AtpSodaSock > getSocks(String tags, String order, int pageNum, int pageSize) {
