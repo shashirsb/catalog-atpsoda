@@ -17,9 +17,9 @@ import static io.helidon.examples.sockshop.catalog.atpsoda.AtpSodaProducers.*;
 /**
  * Integration tests for {@link io.helidon.examples.sockshop.catalog.mongo.MongoCatalogRepository}.
  */
-public class AtpSodaCatalogRepositoryIT extends CatalogRepositoryTest {
-    @Override
-    protected CatalogRepository getCatalogRepository() {
+public class AtpSodaCatalogRepositoryIT {
+    @Test
+    void dbConnectTest() {
         AtpSodaProducers asp = new AtpSodaProducers();
         asp.dbConnect();
     }
