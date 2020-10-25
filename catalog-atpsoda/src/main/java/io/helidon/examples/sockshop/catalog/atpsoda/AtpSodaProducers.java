@@ -69,85 +69,85 @@ import java.util.function.Consumer;
 @Log
 public class AtpSodaProducers {
 
+    
     /**
-     * Default MongoDB host to connect to.
+     * Initialise Connection object
      */
-    public static final String DEFAULT_HOST = "catalog-db";
+    public static Connection conn = null;
 
     /**
-     * Default MongoDB port to connect to.
+     * Initialise OracleDatabase object
      */
-    public static final int DEFAULT_PORT = 27017;
+    public static OracleDatabase db = null;
+
+  
 
     /**
-     * CDI Producer for {@code MongoClient}.
-     *
-     * @param config application configuration, which will be used to read
-     *               the values of a {@code db.host} and {@code db.port}
-     *               configuration properties, if present. If either is not
-     *               present, the defaults defined by the {@link #DEFAULT_HOST}
-     *               and {@link #DEFAULT_PORT} constants will be used.
-     *
-     * @return a {@code MongoClient} instance
+     * This gets config from application.yaml on classpath
+     * and uses "app" section.
      */
-    @Produces
-    @ApplicationScoped
-    public static MongoClient client(Config config) {
-        Config carts = config.get("db");
-        return client(carts.get("host").asString().orElse(DEFAULT_HOST),
-                      carts.get("port").asInt().orElse(DEFAULT_PORT));
+    private static final Config CONFIG = Config.create().get("app");
+
+    /**
+     * The config value for the key {@code version}.
+     */
+    private static String version = CONFIG.get("version").asString("1.0.0");
+
+    /**
+     * In-memory price catalog
+     */
+    private static java.util.Map < Integer, Double > prices;
+
+    /**
+     * In-memory product catalog
+     */
+    private static JsonObject catalog;
+
+    /**
+     * database data
+     */
+    private static boolean UseDB = true;
+    private final static String ATP_CONNECT_NAME = "sockshopdb_medium";
+    private final static String ATP_PASSWORD_FILENAME = "atp_password.txt";
+    private final static String WALLET_LOCATION = "/home/opc/Wallet_sockshopdb";
+    private final static String DB_URL = "jdbc:oracle:thin:@" + ATP_CONNECT_NAME + "?TNS_ADMIN=" + WALLET_LOCATION;
+    private final static String DB_USER = "admin";
+    private static String DB_PASSWORD;
+
+
+    public Connection dbConnect(){
+        try {
+
+            /**
+             * Connect to ATP and verify database connectivity
+             */
+            System.out.println("\n**checking DB catalog");
+
+            // load password from file in wallet location
+            StringBuilder contentBuilder = new StringBuilder();
+            try (Stream<String> stream = Files.lines( Paths.get(WALLET_LOCATION + "/" + ATP_PASSWORD_FILENAME), StandardCharsets.UTF_8)) {
+                    stream.forEach(s -> contentBuilder.append(s).append("\n"));
+                }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            DB_PASSWORD = contentBuilder.toString();
+
+            // set DB properties
+            Properties props = new Properties();
+            props.setProperty("user", DB_USER);
+            props.setProperty("password", DB_PASSWORD);
+
+
+            // Get a JDBC connection to an Oracle instance.
+            conn = DriverManager.getConnection(DB_URL, props);
+         
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return conn;
     }
 
-    /**
-     * CDI Producer for {@code MongoDatabase}.
-     *
-     * @param client the MongoDB client to use
-     *
-     * @return a {@code MongoDatabase} instance
-     */
-    @Produces
-    @ApplicationScoped
-    public static MongoDatabase db(MongoClient client) {
-        return client.getDatabase("catalog");
-    }
-
-    /**
-     * CDI Producer for the {@code MongoCollection} that contains
-     * product catalog.
-     *
-     * @param db the MongoDB database to use
-     *
-     * @return a {@code MongoCollection} instance for the product catalog
-     */
-    @Produces
-    @ApplicationScoped
-    public static MongoCollection<AtpSodaSock> socks(MongoDatabase db) {
-        return db.getCollection("socks", AtpSodaSock.class);
-    }
-
-    // ---- helpers ---------------------------------------------------------
-
-    /**
-     * Create {@code MongoClient} for the specified host and port.
-     *
-     * @param host the MongoDB host to connect to
-     * @param port the MongoDB port to connect to
-     *
-     * @return a {@code MongoClient} instance
-     */
-    static MongoClient client(String host, int port) {
-        log.info(format("Connecting to MongoDB on host %s:%d", host, port));
-        CodecRegistry pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
-                                                         fromProviders(PojoCodecProvider.builder()
-                                                                               .automatic(true)
-                                                                               .conventions(Conventions.DEFAULT_CONVENTIONS)
-                                                                               .build()));
-        MongoClientSettings settings = MongoClientSettings.builder()
-                .applicationName("catalog")
-                .applyToClusterSettings(
-                        builder -> builder.hosts(Collections.singletonList(new ServerAddress(host, port))))
-                .codecRegistry(pojoCodecRegistry)
-                .build();
-        return MongoClients.create(settings);
-    }
 }

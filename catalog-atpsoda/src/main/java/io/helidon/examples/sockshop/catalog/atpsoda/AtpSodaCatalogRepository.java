@@ -31,8 +31,12 @@ import org.bson.BsonDocument;
 import org.bson.conversions.Bson;
 import org.eclipse.microprofile.opentracing.Traced;
 
+import io.helidon.examples.sockshop.catalog.atpsoda.AtpSodaProducers;
+
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.or;
+
+
 
 /**
  * An implementation of {@link io.helidon.examples.sockshop.catalog.CatalogRepository}
@@ -52,64 +56,67 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
     @PostConstruct
     void init() {
-        loadData();
-        socks.createIndex(Indexes.hashed("id"));
+        // loadData();
+        // socks.createIndex(Indexes.hashed("id"));
+
+        AtpSodaProducers asp = new AtpSodaProducers();
+        asp.dbConnect();
     }
 
-    @Override
-    public Collection<? extends AtpSodaSock> getSocks(String tags, String order, int pageNum, int pageSize) {
-        ArrayList<AtpSodaSock> results = new ArrayList<>();
+    // @Override
+    // public Collection<? extends AtpSodaSock> getSocks(String tags, String order, int pageNum, int pageSize) {
+    //     ArrayList<AtpSodaSock> results = new ArrayList<>();
 
-        int skipCount = pageSize * (pageNum - 1);
-        socks.find(tagsFilter(tags))
-                .sort(Sorts.ascending(order))
-                .skip(skipCount)
-                .limit(pageSize)
-                .forEach((Consumer<? super AtpSodaSock>) results::add);
+    //     int skipCount = pageSize * (pageNum - 1);
+    //     socks.find(tagsFilter(tags))
+    //             .sort(Sorts.ascending(order))
+    //             .skip(skipCount)
+    //             .limit(pageSize)
+    //             .forEach((Consumer<? super AtpSodaSock>) results::add);
 
-        return results;
-    }
+    //     return results;
+    // }
 
-    @Override
-    public AtpSodaSock getSock(String sockId) {
-        return socks.find(eq("id", sockId)).first();
-    }
+    // @Override
+    // public AtpSodaSock getSock(String sockId) {
+    //     return socks.find(eq("id", sockId)).first();
+    // }
 
-    @Override
-    public long getSockCount(String tags) {
-        return socks.countDocuments(tagsFilter(tags));
-    }
+    // @Override
+    // public long getSockCount(String tags) {
+    //     return socks.countDocuments(tagsFilter(tags));
+    // }
 
-    @Override
-    public Set<String> getTags() {
-        Set<String> tags = new HashSet<>();
-        socks.distinct("tag", String.class)
-                .forEach((Consumer<? super String>) tags::add);
-        return tags;
-    }
+    // @Override
+    // public Set<String> getTags() {
+    //     Set<String> tags = new HashSet<>();
+    //     socks.distinct("tag", String.class)
+    //             .forEach((Consumer<? super String>) tags::add);
+    //     return tags;
+    // }
 
-    @Override
-    public CatalogRepository loadData() {
-        if (this.socks.countDocuments() == 0) {
-            this.socks.insertMany(loadSocksFromJson(AtpSodaSock.class));
-        }
-        return this;
-    }
+    // @Override
+    // public CatalogRepository loadData() {
+    //     if (this.socks.countDocuments() == 0) {
+    //         this.socks.insertMany(loadSocksFromJson(AtpSodaSock.class));
+    //     }
+    //     return this;
+    // }
 
-    /**
-     * Helper method to create tags filter.
-     *
-     * @param tags a comma-separated list of tags; can be {@code null}
-     *
-     * @return a MongoDB filter for the specified tags
-     */
-    private Bson tagsFilter(String tags) {
-        if (tags != null && !"".equals(tags)) {
-            List<Bson> filters = Arrays.stream(tags.split(","))
-                    .map(tag -> eq("tag", tag))
-                    .collect(Collectors.toList());
-            return or(filters);
-        }
-        return new BsonDocument();
-    }
+    // /**
+    //  * Helper method to create tags filter.
+    //  *
+    //  * @param tags a comma-separated list of tags; can be {@code null}
+    //  *
+    //  * @return a MongoDB filter for the specified tags
+    //  */
+    // private Bson tagsFilter(String tags) {
+    //     if (tags != null && !"".equals(tags)) {
+    //         List<Bson> filters = Arrays.stream(tags.split(","))
+    //                 .map(tag -> eq("tag", tag))
+    //                 .collect(Collectors.toList());
+    //         return or(filters);
+    //     }
+    //     return new BsonDocument();
+    // }
 }
