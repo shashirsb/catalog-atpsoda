@@ -152,6 +152,7 @@ public class AtpSodaProducers {
 
             // Get a JDBC connection to an Oracle instance.
             conn = DriverManager.getConnection(DB_URL, props);
+            System.out.println("DB Connection established successfully!!!");
          
 
         } catch (Exception e) {
