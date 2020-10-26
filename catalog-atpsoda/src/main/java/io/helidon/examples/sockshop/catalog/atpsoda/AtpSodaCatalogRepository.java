@@ -99,16 +99,16 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
     //     socks.createIndex(Indexes.hashed("id"));
     // }
 
-    @PostConstruct
-    void init() {
-        try {
-            String catalogResponse = createData("catalog-docs.json");
-            System.out.println(catalogResponse);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    // @PostConstruct
+    // void init() {
+    //     try {
+    //         String catalogResponse = createData("catalog-docs.json");
+    //         System.out.println(catalogResponse);
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
 
-    }
+    // }
 
     @Override
     public Collection < ? extends AtpSodaSock > getSocks(String tags, String order, int pageNum, int pageSize) {
@@ -300,10 +300,63 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
     @Override
     public Set < String > getTags() {
         Set < String > tags = new HashSet < > ();
-        tags.add("blue");
-        tags.add("skin");
-        // socks.distinct("tag", String.class)
-        //         .forEach((Consumer<? super String>) tags::add);
+        // tags.add("blue");
+        // tags.add("skin");
+        // // socks.distinct("tag", String.class)
+        // //         .forEach((Consumer<? super String>) tags::add);
+        // return tags;
+
+
+        ////////////////////////
+        ///////////////////////     
+
+        org.json.simple.JSONObject _jsonObject = new JSONObject();
+        org.json.simple.parser.JSONParser _parser = new JSONParser();
+        List<String> tagList = new ArrayList < > ();
+
+        try {
+
+            AtpSodaProducers asp = new AtpSodaProducers();
+            OracleDatabase db = asp.dbConnect();
+
+            // Get a collection with the name "socks".
+            // This creates a database table, also named "socks", to store the collection.
+            OracleCollection col = db.admin().createCollection("catalog");
+
+            // Find all documents in the collection.
+            OracleCursor c = null;
+            String jsonFormattedString = null;
+
+            try {
+                c = col.find().getCursor();
+                OracleDocument resultDoc;
+                
+
+                while (c.hasNext()) {
+                    resultDoc = c.next();
+                    JSONParser parser = new JSONParser();
+                    Object obj = parser.parse(resultDoc.getContentAsString());
+                    JSONObject jsonObject = (JSONObject) obj;
+
+                        JSONArray _jsonArraytag = (JSONArray) jsonObject.get("tag");
+
+                        for(int i = 0; i < _jsonArraytag.size(); i++){
+                            tags.add(_jsonArraytag.get(i).toString());
+                        }
+                }
+
+
+
+            } finally {
+                // IMPORTANT: YOU MUST CLOSE THE CURSOR TO RELEASE RESOURCES.
+                if (c != null) c.close();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         return tags;
     }
 
