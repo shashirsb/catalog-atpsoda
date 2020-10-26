@@ -116,23 +116,76 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
         AtpSodaSock atpSodaSock = new AtpSodaSock();
         List <String> imageUrlList = new ArrayList <> ();
 
-        imageUrlList.add("/catalogue/images/bit_of_leg_1.jpeg");
-        imageUrlList.add("/catalogue/images/bit_of_leg_2.jpeg");
+       
+        org.json.simple.JSONObject _jsonObject = new JSONObject();
+        org.json.simple.parser.JSONParser _parser = new JSONParser();
+        
+        
 
-        Set <String> tag_Set = new HashSet <String> ();
+        // Find all documents in the collection.
+        OracleCursor c = null;
+        String jsonFormattedString = null;
 
-        tag_Set.add("blue");
-        tag_Set.add("skin");
+        
 
-        atpSodaSock.id = "0a4f044-b040-410d-8ead-4de0446aec7e";
-        atpSodaSock.name = "ssssssssssssssssssssssssss";
-        atpSodaSock.description = "sssssssssssssssssssssssssssssss";
-        atpSodaSock.imageUrl = imageUrlList;
-        atpSodaSock.price = 7.99f;
-        atpSodaSock.count = 115;
-        atpSodaSock.tag = tag_Set;
+        try {
 
-        results.add(atpSodaSock);
+            AtpSodaProducers asp = new AtpSodaProducers();
+            OracleDatabase db = asp.dbConnect();
+
+            // Get a collection with the name "socks".
+            // This creates a database table, also named "socks", to store the collection.
+            OracleCollection col = db.admin().createCollection("catalog");
+            numDocs = col.find().count();
+
+             // Find all documents in the collection.
+            String jsonFormattedString = null;
+
+            OracleCursor c = col.find().getCursor();
+            OracleDocument resultDoc;
+
+
+            while (c.hasNext()) {
+                OracleDocument resultDoc = c.next();
+               
+                // Print the document key and document content
+                System.out.println ("Document key: " + resultDoc.getKey() + "\n" +
+                                      " document content: " + resultDoc.getContent());
+              }
+            
+            // while (c.hasNext()) {
+            //     // Get the next document.
+            //     resultDoc = c.next();
+            //     _jsonObject = (JSONObject) _parser.parse(resultDoc.getContentAsString());
+
+                imageUrlList.add("/catalogue/images/bit_of_leg_1.jpeg");
+                imageUrlList.add("/catalogue/images/bit_of_leg_2.jpeg");
+        
+                Set <String> tag_Set = new HashSet <String> ();
+        
+                tag_Set.add("blue");
+                tag_Set.add("skin");
+        
+                atpSodaSock.id = "0a4f044-b040-410d-8ead-4de0446aec7e";
+                atpSodaSock.name = "ssssssssssssssssssssssssss";
+                atpSodaSock.description = "sssssssssssssssssssssssssssssss";
+                atpSodaSock.imageUrl = imageUrlList;
+                atpSodaSock.price = 7.99f;
+                atpSodaSock.count = 115;
+                atpSodaSock.tag = tag_Set;
+        
+                results.add(atpSodaSock);
+         
+           / }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        } finally {
+            // IMPORTANT: YOU MUST CLOSE THE CURSOR TO RELEASE RESOURCES.
+            if (c != null) c.close();
+        }
+
+       
         return results;
     }
 
