@@ -193,7 +193,8 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
     @Override
     public AtpSodaSock getSock(String sockId) {
-        ArrayList < AtpSodaSock > results = new ArrayList < > ();        
+        ArrayList < AtpSodaSock > results = new ArrayList < > ();  
+        AtpSodaSock atpSodaSock = new AtpSodaSock();      
 
         org.json.simple.JSONObject _jsonObject = new JSONObject();
         org.json.simple.parser.JSONParser _parser = new JSONParser();
@@ -208,22 +209,19 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             // This creates a database table, also named "socks", to store the collection.
             OracleCollection col = db.admin().createCollection("catalog");
 
-            // Find all documents in the collection.
-            OracleCursor c = null;
+            // Find a documents in the collection.
+            OracleDocument filterSpec =
+                db.createDocumentFromString("{ \"id\" : "+sockId+"}");
+            OracleCursor c = col.find().filter(filterSpec).getCursor();
             String jsonFormattedString = null;
             try {
-
-                OracleDocument filterSpec =
-                db.createDocumentFromString("{ \"id\" : "+sockId+"}");
- 
-                OracleCursor c = col.find().filter(filterSpec).getCursor();
 
                 c = col.find().getCursor();
                 OracleDocument resultDoc;
                 
 
                 while (c.hasNext()) {
-                    AtpSodaSock atpSodaSock = new AtpSodaSock();
+                   
                     List < String > imageUrlList = new ArrayList < > ();
                     Set < String > tag_Set = new HashSet < String > ();
 
