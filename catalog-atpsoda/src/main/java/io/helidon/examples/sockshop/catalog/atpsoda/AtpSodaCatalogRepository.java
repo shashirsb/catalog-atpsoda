@@ -112,8 +112,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
     @Override
     public Collection < ? extends AtpSodaSock > getSocks(String tags, String order, int pageNum, int pageSize) {
-        ArrayList < AtpSodaSock > results = new ArrayList < > ();
-        AtpSodaSock atpSodaSock = new AtpSodaSock();
+        ArrayList < AtpSodaSock > results = new ArrayList < > ();        
         List < String > imageUrlList = new ArrayList < > ();
 
 
@@ -136,9 +135,10 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             try {
                 c = col.find().getCursor();
                 OracleDocument resultDoc;
-
+                
 
                 while (c.hasNext()) {
+                    AtpSodaSock atpSodaSock = new AtpSodaSock();
                     resultDoc = c.next();
 
                     // Print the document key and document content
