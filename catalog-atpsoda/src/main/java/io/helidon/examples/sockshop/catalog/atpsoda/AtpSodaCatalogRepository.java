@@ -175,6 +175,8 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
          
            // }
 
+        }catch(IOException e){
+            e.printStackTrace();
         }catch(Exception e){
             e.printStackTrace();
         } finally {
