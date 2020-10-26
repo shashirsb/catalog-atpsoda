@@ -159,7 +159,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                         JSONArray _jsonArray = (JSONArray) jsonObject.get("imageUrl");
 
                         for(int i = 0; i < _jsonArray.size(); i++){
-                            imageUrlList.add(_jsonArray.getJSONObject(i).toString());
+                            imageUrlList.add(_jsonArray.get(i).toString());
                         }
 
                         // imageUrlList.add("/catalogue/images/bit_of_leg_1.jpeg");
