@@ -122,10 +122,6 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
         
         
 
-        // Find all documents in the collection.
-        OracleCursor c = null;
-        String jsonFormattedString = null;
-
         
 
         try {
@@ -136,21 +132,20 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             // Get a collection with the name "socks".
             // This creates a database table, also named "socks", to store the collection.
             OracleCollection col = db.admin().createCollection("catalog");
-            numDocs = col.find().count();
+        
 
-             // Find all documents in the collection.
-            String jsonFormattedString = null;
+
 
             OracleCursor c = col.find().getCursor();
             OracleDocument resultDoc;
 
 
             while (c.hasNext()) {
-                OracleDocument resultDoc = c.next();
+                resultDoc = c.next();
                
                 // Print the document key and document content
                 System.out.println ("Document key: " + resultDoc.getKey() + "\n" +
-                                      " document content: " + resultDoc.getContent());
+                                      " document content: " + resultDoc.getContentAsString());
               }
             
             // while (c.hasNext()) {
