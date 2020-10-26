@@ -111,7 +111,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
     }
 
     @Override
-    public Collection < ? extends AtpSodaSock > getSocks(String tags, String order, int pageNum, int pageSize) throws Exception {
+    public Collection < ? extends AtpSodaSock > getSocks(String tags, String order, int pageNum, int pageSize)  {
         ArrayList < AtpSodaSock > results = new ArrayList < > ();
         AtpSodaSock atpSodaSock = new AtpSodaSock();
         List < String > imageUrlList = new ArrayList < > ();
