@@ -169,7 +169,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
                 results.add(atpSodaSock);
 
-                // }
+                }
 
                 finally {
                     // IMPORTANT: YOU MUST CLOSE THE CURSOR TO RELEASE RESOURCES.
