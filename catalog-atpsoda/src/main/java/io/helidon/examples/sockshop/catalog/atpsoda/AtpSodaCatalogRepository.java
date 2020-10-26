@@ -156,9 +156,9 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                             System.out.println(jsonObject.get(key));
 
                             JSONObject _json = (JSONObject) obj;
-                                atpSodaSock.id  = _json.get("id");
-                                atpSodaSock.name  = _json.get("name");
-                                atpSodaSock.description  = _json.get("description");
+                                atpSodaSock.id  = _json.get("id").toString();
+                                atpSodaSock.name  = _json.get("name").toString();
+                                atpSodaSock.description  = _json.get("description").toString();
         
                              
                          
