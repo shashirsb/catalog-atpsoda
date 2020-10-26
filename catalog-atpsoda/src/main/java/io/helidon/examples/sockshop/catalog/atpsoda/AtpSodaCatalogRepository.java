@@ -211,7 +211,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
             // Find a documents in the collection.
             OracleDocument filterSpec =
-                db.createDocumentFromString("{ \"id\" : "+sockId+"}");
+                db.createDocumentFromString("{ \"id\" : \""+sockId+"\"}");
             OracleCursor c = col.find().filter(filterSpec).getCursor();
             String jsonFormattedString = null;
             try {
