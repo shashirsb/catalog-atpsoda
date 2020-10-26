@@ -163,7 +163,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                 atpSodaSock.name = "ssssssssssssssssssssssssss";
                 atpSodaSock.description = "sssssssssssssssssssssssssssssss";
                 atpSodaSock.imageUrl = imageUrlList;
-                atpSodaSock.price = 7.99 f;
+                atpSodaSock.price = 7.99f;
                 atpSodaSock.count = 115;
                 atpSodaSock.tag = tag_Set;
 
@@ -202,7 +202,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             atpSodaSock.name = "ssssssssssssssssssssssssss";
             atpSodaSock.description = "sssssssssssssssssssssssssssssss";
             atpSodaSock.imageUrl = imageUrlList;
-            atpSodaSock.price = 7.99 f;
+            atpSodaSock.price = 7.99f;
             atpSodaSock.count = 115;
             atpSodaSock.tag = tag_Set;
 
