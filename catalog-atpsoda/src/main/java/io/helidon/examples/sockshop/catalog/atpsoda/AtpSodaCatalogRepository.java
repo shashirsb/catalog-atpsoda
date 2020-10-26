@@ -151,6 +151,8 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                         atpSodaSock.id = jsonObject.get("id").toString();
                         atpSodaSock.name = jsonObject.get("name").toString();
                         atpSodaSock.description = jsonObject.get("description").toString();
+                        atpSodaSock.price = Float.parseFloat(jsonObject.get("price").toString());
+                        atpSodaSock.count = Integer.parseInt(jsonObject.get("count").toString());
 
                         JSONArray _jsonArrayimageUrl = (JSONArray) jsonObject.get("imageUrl");
 
@@ -165,9 +167,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                         }
 
 
-                        atpSodaSock.imageUrl = imageUrlList;
-                        atpSodaSock.price = 7.99f;
-                        atpSodaSock.count = 115;
+                        atpSodaSock.imageUrl = imageUrlList;                       
                         atpSodaSock.tag = tag_Set;
 
                         
@@ -240,6 +240,8 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                         atpSodaSock.id = jsonObject.get("id").toString();
                         atpSodaSock.name = jsonObject.get("name").toString();
                         atpSodaSock.description = jsonObject.get("description").toString();
+                        atpSodaSock.price = Float.parseFloat(jsonObject.get("price").toString());
+                        atpSodaSock.count = Integer.parseInt(jsonObject.get("count").toString());
 
                         JSONArray _jsonArrayimageUrl = (JSONArray) jsonObject.get("imageUrl");
 
@@ -253,13 +255,8 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                             tag_Set.add(_jsonArraytag.get(i).toString());
                         }
 
-
                         atpSodaSock.imageUrl = imageUrlList;
-                        atpSodaSock.price = 7.99f;
-                        atpSodaSock.count = 115;
-                        atpSodaSock.tag = tag_Set;
-
-                        
+                        atpSodaSock.tag = tag_Set;               
 
 
                     results.add(atpSodaSock);
