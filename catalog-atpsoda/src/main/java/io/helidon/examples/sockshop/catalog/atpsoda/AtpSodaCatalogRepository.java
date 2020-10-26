@@ -144,30 +144,39 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                     // Print the document key and document content
                     System.out.println("Document key: " + resultDoc.getKey() + "\n" +
                         " document content: " + resultDoc.getContentAsString());
+                        
+                        JSONParser parser = new JSONParser();
+
+                        Object obj = parser.parse(resultDoc.getContentAsString());
+
+                        JSONObject jsonObject = (JSONObject) obj;
+
+                        for(Iterator iterator = jsonObject.keySet().iterator(); iterator.hasNext();) {
+                            String key = (String) iterator.next();
+                            System.out.println(jsonObject.get(key));
+                        }
+
+                        //
+                        // imageUrlList.add("/catalogue/images/bit_of_leg_1.jpeg");
+                        // imageUrlList.add("/catalogue/images/bit_of_leg_2.jpeg");
+        
+                        // Set < String > tag_Set = new HashSet < String > ();
+        
+                        // tag_Set.add("blue");
+                        // tag_Set.add("skin");
+        
+                        // atpSodaSock.id = "0a4f044-b040-410d-8ead-4de0446aec7e";
+                        // atpSodaSock.name = "ssssssssssssssssssssssssss";
+                        // atpSodaSock.description = "sssssssssssssssssssssssssssssss";
+                        // atpSodaSock.imageUrl = imageUrlList;
+                        // atpSodaSock.price = 7.99f;
+                        // atpSodaSock.count = 115;
+                        // atpSodaSock.tag = tag_Set;
+        
+                        // results.add(atpSodaSock);
                 }
 
-                // while (c.hasNext()) {
-                //     // Get the next document.
-                //     resultDoc = c.next();
-                //     _jsonObject = (JSONObject) _parser.parse(resultDoc.getContentAsString());
-
-                imageUrlList.add("/catalogue/images/bit_of_leg_1.jpeg");
-                imageUrlList.add("/catalogue/images/bit_of_leg_2.jpeg");
-
-                Set < String > tag_Set = new HashSet < String > ();
-
-                tag_Set.add("blue");
-                tag_Set.add("skin");
-
-                atpSodaSock.id = "0a4f044-b040-410d-8ead-4de0446aec7e";
-                atpSodaSock.name = "ssssssssssssssssssssssssss";
-                atpSodaSock.description = "sssssssssssssssssssssssssssssss";
-                atpSodaSock.imageUrl = imageUrlList;
-                atpSodaSock.price = 7.99f;
-                atpSodaSock.count = 115;
-                atpSodaSock.tag = tag_Set;
-
-                results.add(atpSodaSock);
+               
 
                 }
 
