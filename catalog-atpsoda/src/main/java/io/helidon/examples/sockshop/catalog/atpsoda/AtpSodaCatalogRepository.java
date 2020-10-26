@@ -142,10 +142,6 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
                     resultDoc = c.next();
 
-                    // Print the document key and document content
-                    System.out.println("Document key: " + resultDoc.getKey() + "\n" +
-                        " document content: " + resultDoc.getContentAsString());
-
                     JSONParser parser = new JSONParser();
 
                     Object obj = parser.parse(resultDoc.getContentAsString());
@@ -156,19 +152,18 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                         atpSodaSock.name = jsonObject.get("name").toString();
                         atpSodaSock.description = jsonObject.get("description").toString();
 
-                        JSONArray _jsonArray = (JSONArray) jsonObject.get("imageUrl");
+                        JSONArray _jsonArrayimageUrl = (JSONArray) jsonObject.get("imageUrl");
 
-                        for(int i = 0; i < _jsonArray.size(); i++){
-                            imageUrlList.add(_jsonArray.get(i).toString());
+                        for(int i = 0; i < _jsonArrayimageUrl.size(); i++){
+                            imageUrlList.add(_jsonArrayimageUrl.get(i).toString());
                         }
 
-                        // imageUrlList.add("/catalogue/images/bit_of_leg_1.jpeg");
-                        // imageUrlList.add("/catalogue/images/bit_of_leg_2.jpeg");
+                        JSONArray _jsonArraytag = (JSONArray) jsonObject.get("tag");
 
-                        
+                        for(int i = 0; i < _jsonArraytag.size(); i++){
+                            tag_Set.add(_jsonArraytag.get(i).toString());
+                        }
 
-                        tag_Set.add("blue");
-                        tag_Set.add("skin");
 
                         atpSodaSock.imageUrl = imageUrlList;
                         atpSodaSock.price = 7.99f;
