@@ -232,7 +232,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                     Object obj = parser.parse(resultDoc.getContentAsString());
                     System.out.println("*************************");
                     System.out.println(resultDoc.getContentAsString());
-                    System.out.println(sockId.toString);
+                    System.out.println(sockId.toString());
                     System.out.println("*************************");
 
                     JSONObject jsonObject = (JSONObject) obj;
