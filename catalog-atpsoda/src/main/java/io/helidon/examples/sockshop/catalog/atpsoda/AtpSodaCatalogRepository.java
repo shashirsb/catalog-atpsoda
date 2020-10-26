@@ -122,7 +122,9 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
         
         
 
-        
+              // Find all documents in the collection.
+              OracleCursor c = null;
+              String jsonFormattedString = null;
 
         try {
 
@@ -136,7 +138,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
 
 
-            OracleCursor c = col.find().getCursor();
+            c = col.find().getCursor();
             OracleDocument resultDoc;
 
 
