@@ -151,15 +151,9 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
                     JSONObject jsonObject = (JSONObject) obj;
 
-                    for (Iterator iterator = jsonObject.keySet().iterator(); iterator.hasNext();) {
-                        String key = (String) iterator.next();
-                        System.out.println(jsonObject.get(key));
-
-                        JSONObject _json = (JSONObject) obj;
-                        atpSodaSock.id = _json.get("id").toString();
-                        atpSodaSock.name = _json.get("name").toString();
-                        atpSodaSock.description = _json.get("description").toString();
-
+                        atpSodaSock.id = jsonObject.get("id").toString();
+                        atpSodaSock.name = jsonObject.get("name").toString();
+                        atpSodaSock.description = jsonObject.get("description").toString();
 
 
 
@@ -177,7 +171,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                         atpSodaSock.tag = tag_Set;
 
                         
-                    }
+
 
                     results.add(atpSodaSock);
                 }
