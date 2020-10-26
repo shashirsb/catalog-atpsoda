@@ -215,8 +215,6 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             OracleCursor c = col.find().filter(filterSpec).getCursor();
             String jsonFormattedString = null;
             try {
-
-                c = col.find().getCursor();
                 OracleDocument resultDoc;
                 
 
