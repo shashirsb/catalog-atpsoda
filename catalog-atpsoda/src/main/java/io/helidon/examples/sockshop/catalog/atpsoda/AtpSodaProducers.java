@@ -149,11 +149,11 @@ public class AtpSodaProducers {
             props.setProperty("user", DB_USER);
             props.setProperty("password", DB_PASSWORD);
 
-            System.out.pritnln(DB_USER);
-            System.out.pritnln(DB_PASSWORD);
-            System.out.pritnln(DB_URL);
-            System.out.pritnln(WALLET_LOCATION);
-            System.out.pritnln(ATP_PASSWORD_FILENAME);
+            System.out.println(DB_USER);
+            System.out.println(DB_PASSWORD);
+            System.out.println(DB_URL);
+            System.out.println(WALLET_LOCATION);
+            System.out.println(ATP_PASSWORD_FILENAME);
 
 
             // Get a JDBC connection to an Oracle instance.
