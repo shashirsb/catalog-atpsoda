@@ -154,26 +154,38 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                         for(Iterator iterator = jsonObject.keySet().iterator(); iterator.hasNext();) {
                             String key = (String) iterator.next();
                             System.out.println(jsonObject.get(key));
+
+                            if (jsonObject.has("id")) {
+                                atpSodaSock.id  = jsonObject.getString("id");
+                              }
+                             
+                              if (jsonObject.has("name")) {
+                                atpSodaSock.name  = jsonObject.getString("name");
+                              }
+                             
+                              if (jsonObject.has("description")) {
+                                atpSodaSock.description  = jsonObject.getString("description");
+                              }
+                             
+                         
+           
+                        imageUrlList.add("/catalogue/images/bit_of_leg_1.jpeg");
+                        imageUrlList.add("/catalogue/images/bit_of_leg_2.jpeg");
+        
+                        Set < String > tag_Set = new HashSet < String > ();
+        
+                        tag_Set.add("blue");
+                        tag_Set.add("skin");
+
+                        atpSodaSock.imageUrl = imageUrlList;
+                        atpSodaSock.price = 7.99f;
+                        atpSodaSock.count = 115;
+                        atpSodaSock.tag = tag_Set;
+        
+                        results.add(atpSodaSock);
                         }
 
-                        //
-                        // imageUrlList.add("/catalogue/images/bit_of_leg_1.jpeg");
-                        // imageUrlList.add("/catalogue/images/bit_of_leg_2.jpeg");
-        
-                        // Set < String > tag_Set = new HashSet < String > ();
-        
-                        // tag_Set.add("blue");
-                        // tag_Set.add("skin");
-        
-                        // atpSodaSock.id = "0a4f044-b040-410d-8ead-4de0446aec7e";
-                        // atpSodaSock.name = "ssssssssssssssssssssssssss";
-                        // atpSodaSock.description = "sssssssssssssssssssssssssssssss";
-                        // atpSodaSock.imageUrl = imageUrlList;
-                        // atpSodaSock.price = 7.99f;
-                        // atpSodaSock.count = 115;
-                        // atpSodaSock.tag = tag_Set;
-        
-                        // results.add(atpSodaSock);
+                       
                 }
 
                
