@@ -113,8 +113,6 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
     @Override
     public Collection < ? extends AtpSodaSock > getSocks(String tags, String order, int pageNum, int pageSize) {
         ArrayList < AtpSodaSock > results = new ArrayList < > ();        
-        List < String > imageUrlList = new ArrayList < > ();
-
 
         org.json.simple.JSONObject _jsonObject = new JSONObject();
         org.json.simple.parser.JSONParser _parser = new JSONParser();
@@ -139,6 +137,9 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
                 while (c.hasNext()) {
                     AtpSodaSock atpSodaSock = new AtpSodaSock();
+                    List < String > imageUrlList = new ArrayList < > ();
+                    Set < String > tag_Set = new HashSet < String > ();
+
                     resultDoc = c.next();
 
                     // Print the document key and document content
@@ -155,12 +156,16 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                         atpSodaSock.name = jsonObject.get("name").toString();
                         atpSodaSock.description = jsonObject.get("description").toString();
 
+                        JSONArray _jsonArray = jsonObject.getJSONArray("imageUrl");
 
+                        for(int i = 0; i < _jsonArray.length(); i++){
+                            imageUrlList.add(_jsonArray.getJSONObject(i).toString());
+                        }
 
-                        imageUrlList.add("/catalogue/images/bit_of_leg_1.jpeg");
-                        imageUrlList.add("/catalogue/images/bit_of_leg_2.jpeg");
+                        // imageUrlList.add("/catalogue/images/bit_of_leg_1.jpeg");
+                        // imageUrlList.add("/catalogue/images/bit_of_leg_2.jpeg");
 
-                        Set < String > tag_Set = new HashSet < String > ();
+                        
 
                         tag_Set.add("blue");
                         tag_Set.add("skin");
