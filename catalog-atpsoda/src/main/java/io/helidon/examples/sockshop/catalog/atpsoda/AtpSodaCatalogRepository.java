@@ -111,20 +111,15 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
     }
 
     @Override
-    public Collection < ? extends AtpSodaSock > getSocks(String tags, String order, int pageNum, int pageSize) {
-        ArrayList <AtpSodaSock> results = new ArrayList <> ();
+    public Collection < ? extends AtpSodaSock > getSocks(String tags, String order, int pageNum, int pageSize) throws Exception {
+        ArrayList < AtpSodaSock > results = new ArrayList < > ();
         AtpSodaSock atpSodaSock = new AtpSodaSock();
-        List <String> imageUrlList = new ArrayList <> ();
+        List < String > imageUrlList = new ArrayList < > ();
 
-       
+
         org.json.simple.JSONObject _jsonObject = new JSONObject();
         org.json.simple.parser.JSONParser _parser = new JSONParser();
-        
-        
 
-              // Find all documents in the collection.
-              OracleCursor c = null;
-              String jsonFormattedString = null;
 
         try {
 
@@ -134,180 +129,181 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             // Get a collection with the name "socks".
             // This creates a database table, also named "socks", to store the collection.
             OracleCollection col = db.admin().createCollection("catalog");
-        
+
+            // Find all documents in the collection.
+            OracleCursor c = null;
+            String jsonFormattedString = null;
+            try {
+                c = col.find().getCursor();
+                OracleDocument resultDoc;
 
 
+                while (c.hasNext()) {
+                    resultDoc = c.next();
 
-            c = col.find().getCursor();
-            OracleDocument resultDoc;
+                    // Print the document key and document content
+                    System.out.println("Document key: " + resultDoc.getKey() + "\n" +
+                        " document content: " + resultDoc.getContentAsString());
+                }
 
-
-            while (c.hasNext()) {
-                resultDoc = c.next();
-               
-                // Print the document key and document content
-                System.out.println ("Document key: " + resultDoc.getKey() + "\n" +
-                                      " document content: " + resultDoc.getContentAsString());
-              }
-            
-            // while (c.hasNext()) {
-            //     // Get the next document.
-            //     resultDoc = c.next();
-            //     _jsonObject = (JSONObject) _parser.parse(resultDoc.getContentAsString());
+                // while (c.hasNext()) {
+                //     // Get the next document.
+                //     resultDoc = c.next();
+                //     _jsonObject = (JSONObject) _parser.parse(resultDoc.getContentAsString());
 
                 imageUrlList.add("/catalogue/images/bit_of_leg_1.jpeg");
                 imageUrlList.add("/catalogue/images/bit_of_leg_2.jpeg");
-        
-                Set <String> tag_Set = new HashSet <String> ();
-        
+
+                Set < String > tag_Set = new HashSet < String > ();
+
                 tag_Set.add("blue");
                 tag_Set.add("skin");
-        
+
                 atpSodaSock.id = "0a4f044-b040-410d-8ead-4de0446aec7e";
                 atpSodaSock.name = "ssssssssssssssssssssssssss";
                 atpSodaSock.description = "sssssssssssssssssssssssssssssss";
                 atpSodaSock.imageUrl = imageUrlList;
-                atpSodaSock.price = 7.99f;
+                atpSodaSock.price = 7.99 f;
                 atpSodaSock.count = 115;
                 atpSodaSock.tag = tag_Set;
-        
+
                 results.add(atpSodaSock);
-         
-           // }
 
-        }catch(IOException e){
-            e.printStackTrace();
-        }catch(Exception e){
-            e.printStackTrace();
-        } finally {
-            // IMPORTANT: YOU MUST CLOSE THE CURSOR TO RELEASE RESOURCES.
-            if (c != null) c.close();
+                // }
+
+                finally {
+                    // IMPORTANT: YOU MUST CLOSE THE CURSOR TO RELEASE RESOURCES.
+                    if (c != null) c.close();
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            return results;
         }
 
-       
-        return results;
-    }
+        @Override
+        public AtpSodaSock getSock(String sockId) {
+            ArrayList < AtpSodaSock > results = new ArrayList < > ();
+            AtpSodaSock atpSodaSock = new AtpSodaSock();
+            List < String > imageUrlList = new ArrayList < > ();
 
-    @Override
-    public AtpSodaSock getSock(String sockId) { 
-        ArrayList <AtpSodaSock> results = new ArrayList <> ();
-        AtpSodaSock atpSodaSock = new AtpSodaSock();
-        List <String> imageUrlList = new ArrayList <> ();
+            imageUrlList.add("/catalogue/images/bit_of_leg_1.jpeg");
+            imageUrlList.add("/catalogue/images/bit_of_leg_2.jpeg");
 
-        imageUrlList.add("/catalogue/images/bit_of_leg_1.jpeg");
-        imageUrlList.add("/catalogue/images/bit_of_leg_2.jpeg");
+            Set < String > tag_Set = new HashSet < String > ();
 
-        Set <String> tag_Set = new HashSet <String> ();
+            tag_Set.add("blue");
+            tag_Set.add("skin");
 
-        tag_Set.add("blue");
-        tag_Set.add("skin");
+            atpSodaSock.id = "0a4f044-b040-410d-8ead-4de0446aec7e";
+            atpSodaSock.name = "ssssssssssssssssssssssssss";
+            atpSodaSock.description = "sssssssssssssssssssssssssssssss";
+            atpSodaSock.imageUrl = imageUrlList;
+            atpSodaSock.price = 7.99 f;
+            atpSodaSock.count = 115;
+            atpSodaSock.tag = tag_Set;
 
-        atpSodaSock.id = "0a4f044-b040-410d-8ead-4de0446aec7e";
-        atpSodaSock.name = "ssssssssssssssssssssssssss";
-        atpSodaSock.description = "sssssssssssssssssssssssssssssss";
-        atpSodaSock.imageUrl = imageUrlList;
-        atpSodaSock.price = 7.99f;
-        atpSodaSock.count = 115;
-        atpSodaSock.tag = tag_Set;
+            results.add(atpSodaSock);
+            return atpSodaSock;
 
-        results.add(atpSodaSock);
-        return atpSodaSock;
-
-    }
-
-    @Override
-    public long getSockCount(String tags) {
-        long numDocs = 0;
-        try {
-
-            AtpSodaProducers asp = new AtpSodaProducers();
-            OracleDatabase db = asp.dbConnect();
-            // Get a collection with the name "socks".
-            // This creates a database table, also named "socks", to store the collection.
-            OracleCollection col = db.admin().createCollection("catalog");
-            numDocs = col.find().count();
-
-        } catch (OracleException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
-        return numDocs;
-    }
+        @Override
+        public long getSockCount(String tags) {
+            long numDocs = 0;
+            try {
 
-    @Override
-    public Set<String> getTags() {
-        Set<String> tags = new HashSet<>();
-        tags.add("blue");
-        tags.add("skin");
-        // socks.distinct("tag", String.class)
-        //         .forEach((Consumer<? super String>) tags::add);
-        return tags;
-    }
+                AtpSodaProducers asp = new AtpSodaProducers();
+                OracleDatabase db = asp.dbConnect();
+                // Get a collection with the name "socks".
+                // This creates a database table, also named "socks", to store the collection.
+                OracleCollection col = db.admin().createCollection("catalog");
+                numDocs = col.find().count();
 
-    // @Override
-    // public CatalogRepository loadData() {
-    //     if (this.socks.countDocuments() == 0) {
-    //         this.socks.insertMany(loadSocksFromJson(AtpSodaSock.class));
-    //     }
-    //     return this;
-    // }
+            } catch (OracleException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-    // /**
-    //  * Helper method to create tags filter.
-    //  *
-    //  * @param tags a comma-separated list of tags; can be {@code null}
-    //  *
-    //  * @return a MongoDB filter for the specified tags
-    //  */
-    // private Bson tagsFilter(String tags) {
-    //     if (tags != null && !"".equals(tags)) {
-    //         List<Bson> filters = Arrays.stream(tags.split(","))
-    //                 .map(tag -> eq("tag", tag))
-    //                 .collect(Collectors.toList());
-    //         return or(filters);
-    //     }
-    //     return new BsonDocument();
-    // }
+            return numDocs;
+        }
+
+        @Override
+        public Set < String > getTags() {
+            Set < String > tags = new HashSet < > ();
+            tags.add("blue");
+            tags.add("skin");
+            // socks.distinct("tag", String.class)
+            //         .forEach((Consumer<? super String>) tags::add);
+            return tags;
+        }
+
+        // @Override
+        // public CatalogRepository loadData() {
+        //     if (this.socks.countDocuments() == 0) {
+        //         this.socks.insertMany(loadSocksFromJson(AtpSodaSock.class));
+        //     }
+        //     return this;
+        // }
+
+        // /**
+        //  * Helper method to create tags filter.
+        //  *
+        //  * @param tags a comma-separated list of tags; can be {@code null}
+        //  *
+        //  * @return a MongoDB filter for the specified tags
+        //  */
+        // private Bson tagsFilter(String tags) {
+        //     if (tags != null && !"".equals(tags)) {
+        //         List<Bson> filters = Arrays.stream(tags.split(","))
+        //                 .map(tag -> eq("tag", tag))
+        //                 .collect(Collectors.toList());
+        //         return or(filters);
+        //     }
+        //     return new BsonDocument();
+        // }
 
 
-    public String createData(String fileName) {
-        // Create a collection with the name "MyJSONCollection".
-        // This creates a database table, also named "MyJSONCollection", to store the collection.
-        try {
-            // pass the path to the file as a parameter 
-            String stringToParse = "";
-            stringToParse = new String(Files.readAllBytes(Paths.get(fileName)));
-
-            JSONParser parser = new JSONParser();
-            JSONObject jsonObjects = new JSONObject();
-            JSONArray jsonArray = (JSONArray) parser.parse(stringToParse);
-
-
-            AtpSodaProducers asp = new AtpSodaProducers();
-            OracleDatabase db = asp.dbConnect();
-
+        public String createData(String fileName) {
             // Create a collection with the name "MyJSONCollection".
             // This creates a database table, also named "MyJSONCollection", to store the collection.
-            OracleCollection col = db.admin().createCollection("socks");
+            try {
+                // pass the path to the file as a parameter 
+                String stringToParse = "";
+                stringToParse = new String(Files.readAllBytes(Paths.get(fileName)));
 
-            for (int i = 0; i < jsonArray.size(); i++) {
+                JSONParser parser = new JSONParser();
+                JSONObject jsonObjects = new JSONObject();
+                JSONArray jsonArray = (JSONArray) parser.parse(stringToParse);
 
-                // Create a JSON document.
-                OracleDocument doc =
-                    db.createDocumentFromString(jsonArray.get(i).toString());
 
-                // Insert the document into a collection.
-                col.insert(doc);
+                AtpSodaProducers asp = new AtpSodaProducers();
+                OracleDatabase db = asp.dbConnect();
 
-            }           
+                // Create a collection with the name "MyJSONCollection".
+                // This creates a database table, also named "MyJSONCollection", to store the collection.
+                OracleCollection col = db.admin().createCollection("socks");
 
-        } catch (OracleException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+                for (int i = 0; i < jsonArray.size(); i++) {
+
+                    // Create a JSON document.
+                    OracleDocument doc =
+                        db.createDocumentFromString(jsonArray.get(i).toString());
+
+                    // Insert the document into a collection.
+                    col.insert(doc);
+
+                }
+
+            } catch (OracleException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return "successfully created socks collection !!!";
         }
-        return "successfully created socks collection !!!";
     }
-}
