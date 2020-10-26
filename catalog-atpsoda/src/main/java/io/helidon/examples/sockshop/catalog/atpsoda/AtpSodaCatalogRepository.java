@@ -230,6 +230,10 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                     JSONParser parser = new JSONParser();
 
                     Object obj = parser.parse(resultDoc.getContentAsString());
+                    System.out.println("*************************");
+                    System.out.println(resultDoc.getContentAsString());
+                    System.out.println(sockId.toString);
+                    System.out.println("*************************");
 
                     JSONObject jsonObject = (JSONObject) obj;
 
