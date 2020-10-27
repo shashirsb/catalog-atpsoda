@@ -165,8 +165,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                     results.add(atpSodaSock);
                 }
 
-                System.out.println("/catalogue.. GET Request 200OK");
-                return results;
+
 
             } finally {
                 // IMPORTANT: YOU MUST CLOSE THE CURSOR TO RELEASE RESOURCES.
@@ -177,7 +176,8 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             e.printStackTrace();
         }
 
-        
+        System.out.println("/catalogue.. GET Request 200OK");
+        return results;
     }
 
     @Override
@@ -245,8 +245,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                     results.add(atpSodaSock);
                 }
 
-                System.out.println("/catalogue/{ID}.. GET Request 200OK");
-                return atpSodaSock;
+
 
             } finally {
                 // IMPORTANT: YOU MUST CLOSE THE CURSOR TO RELEASE RESOURCES.
@@ -257,7 +256,8 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             e.printStackTrace();
         }
 
-        
+        System.out.println("/catalogue/{ID}.. GET Request 200OK");
+        return atpSodaSock;
 
     }
 
@@ -273,15 +273,13 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             OracleCollection col = this.db.admin().createCollection("socks");
             numDocs = col.find().count();
 
-            System.out.println("/catalogue/size.. GET Request 200OK");
-            return numDocs;
-
         } catch (OracleException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
-      
+        System.out.println("/catalogue/size.. GET Request 200OK");
+        return numDocs;
     }
 
     @Override
@@ -329,7 +327,6 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             } finally {
                 // IMPORTANT: YOU MUST CLOSE THE CURSOR TO RELEASE RESOURCES.
                 if (c != null) c.close();
-                return tags;
             }
 
         } catch (Exception e) {
@@ -337,7 +334,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
         }
 
        
-        
+        return tags;
     }
 
     // @Override
@@ -399,7 +396,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
                 // Insert the document into a collection.
                 col.insert(doc);
-                return "successfully created socks collection !!!";
+
             }
 
         } catch (OracleException e) {
@@ -407,6 +404,6 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+        return "successfully created socks collection !!!";
     }
 }
