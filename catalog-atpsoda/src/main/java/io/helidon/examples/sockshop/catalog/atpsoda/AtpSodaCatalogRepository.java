@@ -91,7 +91,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
     @Inject
     AtpSodaCatalogRepository() {
         try {
-            String catalogResponse = createData();
+            String catalogResponse = loadData();
             System.out.println(catalogResponse);
         } catch (Exception e) {
             e.printStackTrace();
@@ -161,11 +161,12 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
                         
 
-                    System.out.println("/catalogue.. GET Request 200OK");
+                    
                     results.add(atpSodaSock);
                 }
 
-
+                System.out.println("/catalogue.. GET Request 200OK");
+                return results;
 
             } finally {
                 // IMPORTANT: YOU MUST CLOSE THE CURSOR TO RELEASE RESOURCES.
@@ -176,8 +177,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             e.printStackTrace();
         }
 
-
-        return results;
+        
     }
 
     @Override
@@ -217,10 +217,6 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                     JSONParser parser = new JSONParser();
 
                     Object obj = parser.parse(resultDoc.getContentAsString());
-                    System.out.println("*************************");
-                    System.out.println(resultDoc.getContentAsString());
-                    System.out.println(sockId.toString());
-                    System.out.println("*************************");
 
                     JSONObject jsonObject = (JSONObject) obj;
 
@@ -249,7 +245,8 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                     results.add(atpSodaSock);
                 }
 
-
+                System.out.println("/catalogue/{ID}.. GET Request 200OK");
+                return atpSodaSock;
 
             } finally {
                 // IMPORTANT: YOU MUST CLOSE THE CURSOR TO RELEASE RESOURCES.
@@ -260,8 +257,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             e.printStackTrace();
         }
 
-        System.out.println("/catalogue/{ID}.. GET Request 200OK");
-        return atpSodaSock;
+        
 
     }
 
@@ -277,13 +273,15 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             OracleCollection col = this.db.admin().createCollection("socks");
             numDocs = col.find().count();
 
+            System.out.println("/catalogue/size.. GET Request 200OK");
+            return numDocs;
+
         } catch (OracleException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("/catalogue/size.. GET Request 200OK");
-        return numDocs;
+      
     }
 
     @Override
@@ -331,6 +329,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             } finally {
                 // IMPORTANT: YOU MUST CLOSE THE CURSOR TO RELEASE RESOURCES.
                 if (c != null) c.close();
+                return tags;
             }
 
         } catch (Exception e) {
@@ -338,7 +337,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
         }
 
        
-        return tags;
+        
     }
 
     // @Override
@@ -367,7 +366,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
     // }
 
 
-    public String createData() {
+    public String loadData() {
         // Create a collection with the name "MyJSONCollection".
         // This creates a database table, also named "MyJSONCollection", to store the collection.
 
@@ -400,7 +399,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
                 // Insert the document into a collection.
                 col.insert(doc);
-
+                return "successfully created socks collection !!!";
             }
 
         } catch (OracleException e) {
@@ -408,6 +407,6 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "successfully created socks collection !!!";
+        
     }
 }
