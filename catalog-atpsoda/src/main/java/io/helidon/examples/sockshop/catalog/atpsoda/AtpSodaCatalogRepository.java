@@ -88,27 +88,16 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
     // private MongoCollection<MongoSock> socks;
 
-    // @Inject
-    // MongoCatalogRepository(MongoCollection<MongoSock> socks) {
-    //     this.socks = socks;
-    // }
+    @Inject
+    AtpSodaCatalogRepository() {
+        try {
+            String catalogResponse = createData("catalog-docs.json");
+            System.out.println(catalogResponse);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-    // @PostConstruct
-    // void init() {
-    //     loadData();
-    //     socks.createIndex(Indexes.hashed("id"));
-    // }
-
-    // @PostConstruct
-    // void init() {
-    //     try {
-    //         String catalogResponse = createData("catalog-docs.json");
-    //         System.out.println(catalogResponse);
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //     }
-
-    // }
 
     @Override
     public Collection < ? extends AtpSodaSock > getSocks(String tags, String order, int pageNum, int pageSize) {
@@ -300,15 +289,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
     @Override
     public Set < String > getTags() {
         Set < String > tags = new HashSet < > ();
-        // tags.add("blue");
-        // tags.add("skin");
-        // // socks.distinct("tag", String.class)
-        // //         .forEach((Consumer<? super String>) tags::add);
-        // return tags;
-
-
-        ////////////////////////
-        ///////////////////////     
+   
 
         org.json.simple.JSONObject _jsonObject = new JSONObject();
         org.json.simple.parser.JSONParser _parser = new JSONParser();
