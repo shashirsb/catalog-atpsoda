@@ -370,10 +370,12 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
     public String createData(String fileName) {
         // Create a collection with the name "MyJSONCollection".
         // This creates a database table, also named "MyJSONCollection", to store the collection.
+
+        String jsonData = ""
         try {
             // pass the path to the file as a parameter 
             String stringToParse = "";
-            stringToParse = new String(Files.readAllBytes(Paths.get(fileName)));
+            stringToParse = new String(Files.readAllBytes(Paths.get(./../fileName)));
 
             JSONParser parser = new JSONParser();
             JSONObject jsonObjects = new JSONObject();
