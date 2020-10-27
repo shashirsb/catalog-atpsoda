@@ -18,7 +18,7 @@
 
     <modules>
         <module>catalog-core</module>
-		    <module>catalog-atpsoda</module>
+		<module>catalog-atpsoda</module>
     </modules>
 
 </project>
