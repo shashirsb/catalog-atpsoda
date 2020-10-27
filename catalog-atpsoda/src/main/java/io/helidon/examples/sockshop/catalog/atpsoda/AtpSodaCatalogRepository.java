@@ -333,22 +333,22 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
 
 
-/**
- * Helper method to create tags filter.
- *
- * @param tags a comma-separated list of tags; can be {@code null}
- *
- * @return a MongoDB filter for the specified tags
- */
-private Bson tagsFilter(String tags) {
-    if (tags != null && !"".equals(tags)) {
-        List < Bson > filters = Arrays.stream(tags.split(","))
-            .map(tag - > eq("tag", tag))
-            .collect(Collectors.toList());
-        return or(filters);
-    }
-    return new BsonDocument();
-}
+// /**
+//  * Helper method to create tags filter.
+//  *
+//  * @param tags a comma-separated list of tags; can be {@code null}
+//  *
+//  * @return a MongoDB filter for the specified tags
+//  */
+// private Bson tagsFilter(String tags) {
+//     if (tags != null && !"".equals(tags)) {
+//         List < Bson > filters = Arrays.stream(tags.split(","))
+//             .map(tag - > eq("tag", tag))
+//             .collect(Collectors.toList());
+//         return or(filters);
+//     }
+//     return new BsonDocument();
+// }
 
 
 public String createData() {
