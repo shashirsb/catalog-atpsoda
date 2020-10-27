@@ -161,7 +161,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
                         
 
-
+                    System.out.println("/catalogue.. GET Request 200OK");
                     results.add(atpSodaSock);
                 }
 
@@ -260,7 +260,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             e.printStackTrace();
         }
 
-
+        System.out.println("/catalogue/{ID}.. GET Request 200OK");
         return atpSodaSock;
 
     }
@@ -282,7 +282,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        System.out.println("/catalogue/size.. GET Request 200OK");
         return numDocs;
     }
 
@@ -337,7 +337,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             e.printStackTrace();
         }
 
-
+       
         return tags;
     }
 
