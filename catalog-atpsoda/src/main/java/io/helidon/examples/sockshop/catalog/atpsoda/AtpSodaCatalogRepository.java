@@ -347,7 +347,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
     private void tagsFilter(String tags) {
         System.out.println("9.........................." + tags);
         if (tags != null && !"".equals(tags)) {
-            System.out.println(Arrays.stream(tags.split(","));
+            System.out.println(Arrays.stream(tags.split(",")));
             List<Bson> filters = Arrays.stream(tags.split(","))
                     .map(tag -> eq("tag", tag))
                     .collect(Collectors.toList());
