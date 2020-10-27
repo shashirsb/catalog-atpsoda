@@ -375,7 +375,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
         try {
             // pass the path to the file as a parameter 
             String stringToParse = "";
-            stringToParse = new String(Files.readAllBytes(Paths.get(./../fileName)));
+            stringToParse = new String(Files.readAllBytes(Paths.get("./../"+fileName)));
 
             JSONParser parser = new JSONParser();
             JSONObject jsonObjects = new JSONObject();
