@@ -346,15 +346,14 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
      */
     private void tagsFilter(String tags) {
         if (tags != null && !"".equals(tags)) {
-            System.out.println(Arrays.stream(tags.split(",")));
-            ArrayList<String> tags = Arrays.stream(tags.split(","))
-                                          .add(tag);
+            System.out.println(tags.split("\\s*,\\s*"));
+            List<String> _tags = Arrays.asList(tags.split("\\s*,\\s*"));
 
 
-            System.out.println("{\"tag\" : {\"$in\" : " + tags.toString() + "}}");
+            System.out.println("{\"tag\" : {\"$in\" : " + _tags.toString() + "}}");
 
             System.out.println("1..........................");
-            System.out.println(tags.toString());
+            System.out.println(_tags.toString());
             System.out.println("2..........................");
         }
         // System.out.println("1..........................");
