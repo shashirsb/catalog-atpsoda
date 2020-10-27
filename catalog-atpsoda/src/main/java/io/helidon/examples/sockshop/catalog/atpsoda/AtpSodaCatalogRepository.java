@@ -86,12 +86,12 @@ import org.json.simple.parser.JSONParser;
 @Traced
 public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
-    // private MongoCollection<MongoSock> socks;
+    public static OracleDatabase db = null;
 
     @Inject
     AtpSodaCatalogRepository() {
         try {
-            String catalogResponse = createData("catalog-docs.json");
+            String catalogResponse = createData();
             System.out.println(catalogResponse);
         } catch (Exception e) {
             e.printStackTrace();
@@ -109,8 +109,8 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
         try {
 
-            AtpSodaProducers asp = new AtpSodaProducers();
-            OracleDatabase db = asp.dbConnect();
+            // AtpSodaProducers asp = new AtpSodaProducers();
+            // OracleDatabase db = asp.dbConnect();
 
             // Get a collection with the name "socks".
             // This creates a database table, also named "socks", to store the collection.
@@ -367,7 +367,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
     // }
 
 
-    public String createData(String fileName) {
+    public String createData() {
         // Create a collection with the name "MyJSONCollection".
         // This creates a database table, also named "MyJSONCollection", to store the collection.
 
