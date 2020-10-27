@@ -191,16 +191,16 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
         try {
 
-            AtpSodaProducers asp = new AtpSodaProducers();
-            OracleDatabase db = asp.dbConnect();
+            // AtpSodaProducers asp = new AtpSodaProducers();
+            // OracleDatabase db = asp.dbConnect();
 
             // Get a collection with the name "socks".
             // This creates a database table, also named "socks", to store the collection.
-            OracleCollection col = db.admin().createCollection("socks");
+            OracleCollection col = this.db.admin().createCollection("socks");
 
             // Find a documents in the collection.
             OracleDocument filterSpec =
-                db.createDocumentFromString("{ \"id\" : \""+sockId+"\"}");
+                this.db.createDocumentFromString("{ \"id\" : \""+sockId+"\"}");
             OracleCursor c = col.find().filter(filterSpec).getCursor();
             String jsonFormattedString = null;
             try {
@@ -270,11 +270,11 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
         long numDocs = 0;
         try {
 
-            AtpSodaProducers asp = new AtpSodaProducers();
-            OracleDatabase db = asp.dbConnect();
+            // AtpSodaProducers asp = new AtpSodaProducers();
+            // OracleDatabase db = asp.dbConnect();
             // Get a collection with the name "socks".
             // This creates a database table, also named "socks", to store the collection.
-            OracleCollection col = db.admin().createCollection("socks");
+            OracleCollection col = this.db.admin().createCollection("socks");
             numDocs = col.find().count();
 
         } catch (OracleException e) {
@@ -297,12 +297,12 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
         try {
 
-            AtpSodaProducers asp = new AtpSodaProducers();
-            OracleDatabase db = asp.dbConnect();
+            // AtpSodaProducers asp = new AtpSodaProducers();
+            // OracleDatabase db = asp.dbConnect();
 
             // Get a collection with the name "socks".
             // This creates a database table, also named "socks", to store the collection.
-            OracleCollection col = db.admin().createCollection("socks");
+            OracleCollection col = this.db.admin().createCollection("socks");
 
             // Find all documents in the collection.
             OracleCursor c = null;
@@ -388,7 +388,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             // Create a collection with the name "MyJSONCollection".
             // This creates a database table, also named "MyJSONCollection", to store the collection.\
            
-            OracleCollection col = db.admin().createCollection("socks");
+            OracleCollection col = this.db.admin().createCollection("socks");
 
             col.admin().truncate();
 
@@ -396,7 +396,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
                 // Create a JSON document.
                 OracleDocument doc =
-                    db.createDocumentFromString(jsonArray.get(i).toString());
+                    this.db.createDocumentFromString(jsonArray.get(i).toString());
 
                 // Insert the document into a collection.
                 col.insert(doc);
