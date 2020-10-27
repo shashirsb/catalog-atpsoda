@@ -349,7 +349,9 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
         String _tagFilter = "";
         if (tags != null && !"".equals(tags)) {
             List<String> _tags = Arrays.asList(tags.split("\\s*,\\s*"));
-            _tagFilter = "{\"tag\" : {\"$in\" : " + _tags.toString() + "}}";
+            String step1 = StringUtils.join(_tags, "\", \"");// Join with ", "
+            String step2 = StringUtils.wrap(step1, "\"");// Wrap step1 with "
+            _tagFilter = "{\"tag\" : {\"$in\" : " + step2.toString() + "}}";
             return _tagFilter;
         } else {
             _tagFilter = "{}";
