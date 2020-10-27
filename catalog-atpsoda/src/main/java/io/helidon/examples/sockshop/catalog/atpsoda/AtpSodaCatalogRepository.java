@@ -345,10 +345,16 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
      * @return a MongoDB filter for the specified tags
      */
     private void tagsFilter(String tags) {
+        System.out.println("9.........................." + tags);
         if (tags != null && !"".equals(tags)) {
+            System.out.println(Arrays.stream(tags.split(","));
             List<Bson> filters = Arrays.stream(tags.split(","))
                     .map(tag -> eq("tag", tag))
                     .collect(Collectors.toList());
+
+
+                   // {"tag" : {"$in" : ["tea", "soda"]}}
+
             System.out.println("1..........................");
             System.out.println(or(filters).toString());
             System.out.println("2..........................");
