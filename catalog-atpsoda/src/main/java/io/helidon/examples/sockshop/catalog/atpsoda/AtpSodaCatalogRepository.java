@@ -119,14 +119,14 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             try {
 
                 // Find a documents in the collection.
-            // OracleDocument filterSpec =
-            // this.db.createDocumentFromString("{ \"id\" : \"" + sockId + "\"}");
-            //    c = col.find().filter(filterSpec).getCursor();
-            tagsFilter(tags);
+            String _tagFilter = tagsFilter(tags);
+            OracleDocument filterSpec =
+            this.db.createDocumentFromString(_tagFilter);
+               c = col.find().filter(filterSpec).getCursor();
+
+            
                 c = col.find().getCursor();
                 OracleDocument resultDoc;
-
-
                 while (c.hasNext()) {
                     AtpSodaSock atpSodaSock = new AtpSodaSock();
                     List < String > imageUrlList = new ArrayList < > ();
@@ -344,21 +344,16 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
      *
      * @return a MongoDB filter for the specified tags
      */
-    private void tagsFilter(String tags) {
+    private String tagsFilter(String tags) {
+        String _tagFilter = "";
         if (tags != null && !"".equals(tags)) {
-            System.out.println(tags.split("\\s*,\\s*"));
             List<String> _tags = Arrays.asList(tags.split("\\s*,\\s*"));
-
-
-            System.out.println("{\"tag\" : {\"$in\" : " + _tags.toString() + "}}");
-
-            System.out.println("1..........................");
-            System.out.println(_tags.toString());
-            System.out.println("2..........................");
+            _tagFilter = "{\"tag\" : {\"$in\" : " + _tags.toString() + "}}";
+            return _tagFilter;
+        } else {
+            _tagFilter = "{}";
         }
-        // System.out.println("1..........................");
-        // System.out.println(new BsonDocument().toString());
-        // System.out.println("2..........................");
+        return _tagFilter;
     }
 
 
