@@ -114,7 +114,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
             // Get a collection with the name "socks".
             // This creates a database table, also named "socks", to store the collection.
-            OracleCollection col = db.admin().createCollection("socks");
+            OracleCollection col = this.db.admin().createCollection("socks");
 
             // Find all documents in the collection.
             OracleCursor c = null;
@@ -383,7 +383,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
 
 
             AtpSodaProducers asp = new AtpSodaProducers();
-            OracleDatabase db = asp.dbConnect();
+            this.db = asp.dbConnect();
 
             // Create a collection with the name "MyJSONCollection".
             // This creates a database table, also named "MyJSONCollection", to store the collection.\
