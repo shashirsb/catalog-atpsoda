@@ -125,11 +125,9 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             System.out.println(_tagFilter);
             OracleDocument filterSpec =
             //this.db.createDocumentFromString(_tagFilter);
-            this.db.createDocumentFromString("{\"tag\" : [\"blue\"]}");
+            this.db.createDocumentFromString(_tagFilter);
                c = col.find().filter(filterSpec).getCursor();
 
-            
-                c = col.find().getCursor();
                 OracleDocument resultDoc;
                 while (c.hasNext()) {
                     AtpSodaSock atpSodaSock = new AtpSodaSock();
