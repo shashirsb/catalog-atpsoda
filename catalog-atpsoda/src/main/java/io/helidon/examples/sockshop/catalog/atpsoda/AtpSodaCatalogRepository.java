@@ -77,6 +77,7 @@ import org.json.simple.parser.JSONParser;
 
 
 
+
 /**
  * An implementation of {@link io.helidon.examples.sockshop.catalog.CatalogRepository}
  * that that uses MongoDB as a backend data store.
@@ -121,6 +122,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
                 // Find a documents in the collection.
             String _tagFilter = tagsFilter(tags);
             System.out.println("{\"tag\" : {\"$in\" : [formal, red, magic]}}");
+            System.out.println(_tagFilter);
             OracleDocument filterSpec =
             this.db.createDocumentFromString(_tagFilter);
                c = col.find().filter(filterSpec).getCursor();
@@ -349,9 +351,9 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
         String _tagFilter = "";
         if (tags != null && !"".equals(tags)) {
             List<String> _tags = Arrays.asList(tags.split("\\s*,\\s*"));
-            String step1 = StringUtils.join(_tags, "\", \"");// Join with ", "
-            String step2 = StringUtils.wrap(step1, "\"");// Wrap step1 with "
-            _tagFilter = "{\"tag\" : {\"$in\" : " + step2.toString() + "}}";
+            String step1 = _tags.join("\", \"",_tags);// Join with ", "
+            //String step2 = StringUtils.wrap(step1, "\"");// Wrap step1 with "
+            _tagFilter = "{\"tag\" : {\"$in\" : " + step1.toString() + "}}";
             return _tagFilter;
         } else {
             _tagFilter = "{}";
