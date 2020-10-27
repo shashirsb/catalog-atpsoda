@@ -256,7 +256,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
             e.printStackTrace();
         }
 
-        System.out.println("/catalogue/{ID}.. GET Request 200OK");
+        System.out.println("/catalogue/"+sockId+".. GET Request 200OK");
         return atpSodaSock;
 
     }
