@@ -91,7 +91,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
     @Inject
     AtpSodaCatalogRepository() {
         try {
-            String catalogResponse = loadData();
+            String catalogResponse = createData();
             System.out.println(catalogResponse);
         } catch (Exception e) {
             e.printStackTrace();
@@ -363,7 +363,7 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
     // }
 
 
-    public String loadData() {
+    public String createData() {
         // Create a collection with the name "MyJSONCollection".
         // This creates a database table, also named "MyJSONCollection", to store the collection.
 
