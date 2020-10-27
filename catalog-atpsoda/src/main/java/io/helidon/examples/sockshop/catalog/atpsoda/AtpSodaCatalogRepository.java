@@ -75,7 +75,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
 
-
+import org.apache.commons.lang3.StringUtils;
 
 
 /**
@@ -352,8 +352,8 @@ public class AtpSodaCatalogRepository extends DefaultCatalogRepository {
         if (tags != null && !"".equals(tags)) {
             List<String> _tags = Arrays.asList(tags.split("\\s*,\\s*"));
             String step1 = _tags.join("\", \"",_tags);// Join with ", "
-            //String step2 = StringUtils.wrap(step1, "\"");// Wrap step1 with "
-            _tagFilter = "{\"tag\" : {\"$in\" : " + step1.toString() + "}}";
+            String step2 = StringUtils.wrap(step1, "\"");// Wrap step1 with "
+            _tagFilter = "{\"tag\" : {\"$in\" : " + step2.toString() + "}}";
             return _tagFilter;
         } else {
             _tagFilter = "{}";
