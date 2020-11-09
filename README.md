@@ -16,15 +16,27 @@ The service exposes REST API on port 7001.
 
 > **TBD** (add OpenAPI support/link)
 
-## Building the service
+## Add ATP Soda jar files to the maven project
 
 In order to build all the modules and create Docker images for the service, simply run the 
 following commands inside the top-level `catalog` directory:
 
 ```bash
 $vi ./catalog-atpsoda/src/main/resources/add_external_jars.sh
-change the path: sockshop-catalog e.g. SOCKSHOP_CATALOG_ATPSODA=$HOME/helidon/final-code/sockshop-catalog/catalog-atpsoda
 
+change the path to sockshop-catalog 
+e.g. SOCKSHOP_CATALOG_ATPSODA=$HOME/helidon/final-code/sockshop-catalog/catalog-atpsoda
+
+$ ./catalog-atpsoda/src/main/resources/add_external_jars.sh
+
+``` 
+
+## Building the service
+
+In order to build all the modules and create Docker images for the service, simply run the 
+following commands inside the top-level `catalog` directory:
+
+```bash
 
 $ mvn clean install
 $ mvn package -Pdocker -DskipTests
