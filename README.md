@@ -6,17 +6,9 @@ The Product Catalog Service is implemented as a multi-module project containing 
 domain model, the REST service itself, as well as the data repository abstraction and its 
 in-memory implementation;
 
-2. **[catalog-coherence](./catalog-coherence)** contains the data repository implementation for 
-Coherence backend
+2. **[catalog-atpsoda](./catalog-atpsoda)** contains the data repository implementation for 
+Oracle ATP JSON (Soda) backend
 
-3. **[catalog-mongo](./catalog-mongo)** contains the data repository implementation for MongoDB 
-backend;
-
-4. **[catalog-mysql](./catalog-mysql)** contains the data repository implementation for MySQL 
-backend (using JPA).
-
-5. **[catalog-redis](./catalog-redis)** contains the data repository implementation for Redis 
-backend (using Redisson client).
 
 ## API
 
