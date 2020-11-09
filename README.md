@@ -22,6 +22,10 @@ In order to build all the modules and create Docker images for the service, simp
 following commands inside the top-level `catalog` directory:
 
 ```bash
+$vi ./catalog-atpsoda/src/main/resources/add_external_jars.sh
+change the path: sockshop-catalog e.g. SOCKSHOP_CATALOG_ATPSODA=$HOME/helidon/final-code/sockshop-catalog/catalog-atpsoda
+
+
 $ mvn clean install
 $ mvn package -Pdocker -DskipTests
 ``` 
